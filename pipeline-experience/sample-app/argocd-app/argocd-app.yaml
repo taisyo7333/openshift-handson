@@ -1,0 +1,22 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: log-test
+  namespace: openshift-gitops
+spec:
+  destination:
+    name: ''
+    namespace: log-test
+    server: https://kubernetes.default.svc
+  source:
+    path: ./openshift_manifest
+    repoURL: https://gitlab.com/masaki-oomura/log-test.git
+    targetRevision: main
+  sources: []
+  project: log-test
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
