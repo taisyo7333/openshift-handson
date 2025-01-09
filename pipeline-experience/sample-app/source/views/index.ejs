@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Input Form</title>
+  <style>
+    /* CSSスタイルをheaderに記述しちゃう。複雑な修飾の場合は別ファイルでやりましょう */
+    .hostname {
+      color: rgb(255, 0, 0);
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>ホスト名: <%= hostname %></h1>
+    <!-- 色を変えたい場合はコメントアウトを削除 -->
+    <!-- <h1>ホスト名: <span class="hostname"><%= hostname %></span></h1> -->
+  </header>
+  <% if (submitted) { %>
+    <h1>入力された文字列: <%= submittedText %></h1>
+    <h1>メッセージがlog.txtに保存されました。</h1>
+    <form action="/" method="get">
+      <button type="submit">TOPに戻る</button>
+    </form>
+  <% } else { %>
+    <h1>文字列を入力してください</h1>
+    <form action="/submit" method="post">
+      <input type="text" name="inputText" required>
+      <button type="submit">Submit</button>
+    </form>
+  <% } %>
+</body>
+</html>

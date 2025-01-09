@@ -6,14 +6,14 @@ metadata:
 spec:
   destination:
     name: ''
-    namespace: log-test
+    namespace: myproject
     server: https://kubernetes.default.svc
   source:
-    path: ./openshift_manifest
-    repoURL: https://gitlab.com/masaki-oomura/log-test.git
+    path: ./pipeline-experience/sample-app/manifest
+    repoURL: https://gitlab.com/masaki-oomura/openshift-handson.git
     targetRevision: main
   sources: []
-  project: log-test
+  project: default
   syncPolicy:
     automated:
       prune: true
