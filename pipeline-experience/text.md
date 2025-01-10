@@ -43,10 +43,18 @@ Workspaceが無いと、**①**が完了すると、ダウンロードしてき�
 ## やることの流れとイメージ
 3つのTaskから構成されるパイプラインを作ってみましょう。
 
-**■Task**
+**■3つのTask**
 - 任意のGitリポジトリからソースコードを`git clone`してくる
 - ソースコードからイメージをビルドして内部レジストリに保存
 - GitリポジトリにおいてあるサンプルアプリのManifest一覧を適用する
+
+**■サンプルアプリについて**
+- 入力内容をコンテナの標準出力に出力するNode.jsアプリ
+- 入力内容はlog.txt内に上書きされていく
+- 「**ホスト名：**」欄には起動中のPod名が表示される
+
+![alt text](image-35.png)
+![alt text](image-36.png)
 
 ![alt text](<スクリーンショット 2025-01-09 15.19.24.png>)
 ```
@@ -92,9 +100,10 @@ spec:
 ![alt text](image-17.png)
 
 ---
-![alt text](image-26.png)
-「**Buildah**」はデーモンレスのビルドツールで、Red Hatが主導して開発しているOSSです。詳細は[こちら](https://www.redhat.com/ja/topics/containers/what-is-buildah)。
+**■補足：** 「**Buildah**」はデーモンレスのビルドツールで、Red Hatが主導して開発しているOSSです。詳細は[こちら](https://www.redhat.com/ja/topics/containers/what-is-buildah)。
 （ブルドッグがパンツ被っているようなアイコンです）
+![alt text](image-26.png)
+
 
 ---
 
@@ -209,6 +218,125 @@ spec:
 ![alt text](<スクリーンショット 2025-01-10 14.38.13.png>)
 
 ---
-**■補足①：** Tektonの各Taskは「[Tekton Hub](https://hub.tekton.dev/)」に詳細な使い方が記載されています。
+**■補足：** 「**Trivy**」は軽量な脆弱性検知ツールで、コンテナイメージもスキャンできます。コンテナイメージのみならず、ManifestファイルやIaCのファイル（Terraform 等）もスキャンできます。DesktopやServerにインストールして利用することもできますが、TektonのTaskとしても実行可能です。
+![alt text](image-27.png)
+
+なお、コンテナイメージをスキャンし、CVSSにて定義される深刻度(UNKNOWN、LOW、MEDIUM、HIGH、CRITICAL)からHIGH以上の脆弱性をチェック対象とする場合、以下のTrivyコマンドでスキャンすることが可能です。
+
+```
+trivy image IMAGE_NAME --severity HIGH,CRITICAL
+```
+
+つまり、「**ARGS**」欄にはTrivyコマンドを入力することになります。
 
 ---
+
+### 保存をクリック
+- 必要なパラメータが設定されたら「**保存**」をクリックします
+
+![alt text](<スクリーンショット 2025-01-10 15.05.06.png>)
+
+## パイプラインを開始する
+パイプラインが完成したので、さっそく動作させてみます。
+
+### 「開始をクリック]
+- パイプライン詳細画面の右上「**Actions**」から「**開始**」をクリック
+
+![alt text](image-28.png)
+
+- パイプライン実行時の設定値に、パラメータのデフォルト値が入っていることを確認
+
+![alt text](image-29.png)
+
+---
+**■補足：** これらはあくまで「**デフォルト値**」なので、この画面で変更してパイプラインを実行することも可能です。
+
+---
+
+### ワークスペースのPVCを設定
+- 事前に適用しておいたPVC「`workspace-pvc`」を設定
+
+![alt text](image-31.png)
+
+### パイプラインを開始
+- 「**開始**」をクリックしてパイプラインを動作させる
+
+![alt text](image-32.png)
+
+### パイプラインの実行結果を確認
+- 「**ログ**」メニューで各Taskの実行結果を確認しておく
+
+![alt text](image-33.png)
+
+## ArgoCDアプリケーションを適用してアプリをデプロイ
+ここまでの作業で作成・実行したパイプラインを使い、コンテナイメージのビルドとスキャンが完了しました。このイメージを使ってアプリケーションをデプロイします。デプロイはArgoCDアプリケーションを利用しましょう。
+
+### log-testアプリのArgoCDアプリケーションを確認しておく
+- [./pipeline-experience/sample-app/argocd-app/argocd-app.yaml](https://gitlab.com/masaki-oomura/openshift-handson/-/blob/main/pipeline-experience/sample-app/argocd-app/argocd-app.yaml)にアクセスする
+
+```
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: log-test
+  namespace: openshift-gitops
+spec:
+  destination:
+    name: ''
+    namespace: myproject
+    server: https://kubernetes.default.svc
+  source:
+    path: ./pipeline-experience/sample-app/manifest
+    repoURL: https://gitlab.com/masaki-oomura/openshift-handson.git
+    targetRevision: main
+  sources: []
+  project: default
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
+```
+
+### NameSpaceにArgoCDによる管理を許可するアノテーションを付ける
+- Web Terminalを開き、以下コマンドを実行する
+
+```
+oc label namespace myproject argocd.argoproj.io/managed-by=openshift-gitops
+```
+---
+**■補足：** ArgoCDによる管理（Manifestを適用、リソースを作成・編集・削除 等）を許可するためには、NameSpace（プロジェクト）に以下のようなラベルをつけておく必要があります。
+```
+kind: Project
+metadata:
+  name: myproject
+  ...
+  labels:
+    argocd.argoproj.io/managed-by: openshift-gitops
+```
+
+---
+
+### ArgoCDアプリケーションを適用する
+- OpenShiftのWeb Terminalを開く
+- 以下のコマンドを用いてArgoCDアプリケーションを適用する
+
+```
+oc apply -f https://gitlab.com/masaki-oomura/openshift-handson/-/raw/main/pipeline-experience/sample-app/argocd-app/argocd-app.yaml -n openshift-gitops
+```
+
+---
+**■補足：** 「[gitops-experience](https://gitlab.com/masaki-oomura/openshift-handson/-/blob/main/gitops-experience/text.md?ref_type=heads#argocd%E3%81%8B%E3%82%89manifest%E3%82%92%E9%81%A9%E7%94%A8%E3%81%97%E3%81%A6%E3%82%82%E3%82%89%E3%81%86)」では、ArgoCDのコンソール画面からArgoCDアプリケーションのYAMLファイルを適用しましたが、ArgoCDのadmin権限を持つOpenShiftユーザがocコマンドを利用して直接YAMLファイルをクラスタに適用することもできます。
+
+---
+
+### ArgoCDのコンソール画面を確認する
+- ArgoCDの「**Applications**」メニューで、「**log-test**」アプリのSync状態を確認する
+
+![alt text](<スクリーンショット 2025-01-10 15.36.13.png>)
+![alt text](image-34.png)
+
+- OpenShiftのコンソール画面にて、「**トポロジー**」メニューから「**log-test**」アプリにアクセスする
+
+![alt text](<スクリーンショット 2025-01-10 15.39.27.png>)

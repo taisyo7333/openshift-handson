@@ -27,12 +27,6 @@ app.post('/submit', (req, res) => {
   const inputText = req.body.inputText;
   console.log('入力された文字列:', inputText);
 
-  // ファイルに出力
-  fs.appendFile('log.txt', `入力された文字列: ${inputText}\n`, (err) => {
-    if (err) throw err;
-    console.log('メッセージがlog.txtに保存されました。');
-  });
-
   // 提出後に EJS テンプレートをレンダリング
   res.render('index', { submitted: true, submittedText: inputText, hostname: hostname });
 });
