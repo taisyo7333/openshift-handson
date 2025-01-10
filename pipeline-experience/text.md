@@ -351,7 +351,7 @@ oc apply -f https://gitlab.com/masaki-oomura/openshift-handson/-/raw/main/pipeli
 ```
 
 ---
-**■補足：** 「[gitops-experience](https://gitlab.com/masaki-oomura/openshift-handson/-/blob/main/gitops-experience/text.md?ref_type=heads#argocd%E3%81%8B%E3%82%89manifest%E3%82%92%E9%81%A9%E7%94%A8%E3%81%97%E3%81%A6%E3%82%82%E3%82%89%E3%81%86)」では、ArgoCDのコンソール画面からArgoCDアプリケーションのYAMLファイルを適用しましたが、ArgoCDのadmin権限を持つOpenShiftユーザがocコマンドを利用して直接YAMLファイルをクラスタに適用することもできます。
+**■補足：** 「[GitOpsを体験](https://gitlab.com/masaki-oomura/openshift-handson/-/blob/main/gitops-experience/text.md?ref_type=heads#argocd%E3%81%8B%E3%82%89manifest%E3%82%92%E9%81%A9%E7%94%A8%E3%81%97%E3%81%A6%E3%82%82%E3%82%89%E3%81%86)」では、ArgoCDのコンソール画面からArgoCDアプリケーションのYAMLファイルを適用しましたが、ArgoCDのadmin権限を持つOpenShiftユーザがocコマンドを利用して直接YAMLファイルをクラスタに適用することもできます。
 
 ---
 
