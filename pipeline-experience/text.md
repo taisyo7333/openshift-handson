@@ -233,7 +233,7 @@ spec:
 |パラメータ|詳細|設定するべき内容|
 |---|---|---|
 |ARGS|trivyコマンドを入力する欄|`image`<br>`--severity HIGH,CRITICAL`|
-|IMAGE_PATH|イメージスキャンする対象のコンテナイメージ格納先|`$(params.INTERNAL_REGISTRY_URL)`|
+|IMAGE_PATH|イメージスキャンする対象のコンテナイメージ格納先|```$(params.INTERNAL_REGISTRY_URL)```|
 
 ![alt text](<スクリーンショット 2025-01-10 14.38.13.png>)
 
