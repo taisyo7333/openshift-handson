@@ -41,22 +41,41 @@ Workspaceが無いと、**①**が完了すると、ダウンロードしてき�
 ![alt text](image-1.png)
 
 ## やることの流れとイメージ
-3つのTaskから構成されるパイプラインを作ってみましょう。
+3つのTaskから構成されるパイプラインを作り、GitOpsと組み合わせてアプリケーションのCI/CDを実現しましょう。
+
+![alt text](image-43.png)
 
 **■3つのTask**
 - 任意のGitリポジトリからソースコードを`git clone`してくる
 - ソースコードからイメージをビルドして内部レジストリに保存
-- GitリポジトリにおいてあるサンプルアプリのManifest一覧を適用する
+- コンテナイメージをスキャンする
 
 **■サンプルアプリについて**
-- 入力内容をコンテナの標準出力に出力するNode.jsアプリ
-- 入力内容はlog.txt内に上書きされていく
+- 入力内容をPodの「**ログ（標準出力）**」に出力するNode.jsアプリ
 - 「**ホスト名：**」欄には起動中のPod名が表示される
 
-![alt text](image-35.png)
-![alt text](image-36.png)
+![alt text](image-38.png)
+![alt text](image-39.png)
+![alt text](image-40.png)
+
+## ワークスペース用のPVCを作成しておく
+パイプラインのワークスペースには、各Task実行中にデータを保存するためのPVCが必要です。そのPVCを事前に作成しておきます。
+
+### PVC作成画面に移動
+- OpenShiftのコンソール画面（管理者向け表示）にて、左メニュー「**ストレージ**」から「**PersistentVolumeClaims**」をクリックし
+- 「**PersistentVolumeClaimの作成**」をクリックし「**with Form**」を選択
+- 以下の通り値を設定し「**作成**」をクリック
+
+
+|項目|設定内容|
+|---|---|
+|PersistentVolumeClaim 名|`workspace-pvc`|
+|サイズ|`1` GiB|
 
 ![alt text](<スクリーンショット 2025-01-09 15.19.24.png>)
+
+---
+**■補足：** YAMLファイルで作成する場合は以下のような内容になる。
 ```
 kind: PersistentVolumeClaim
 apiVersion: v1
@@ -76,6 +95,7 @@ spec:
   #AWS環境のOpenShiftではAWS EBSが提供する「gp3-csi」というStorage Classが使える
   volumeMode: Filesystem
 ```
+---
 ## パイプライン作成とTaskの追加
 
 ### パイプラインの新規作成
@@ -340,3 +360,12 @@ oc apply -f https://gitlab.com/masaki-oomura/openshift-handson/-/raw/main/pipeli
 - OpenShiftのコンソール画面にて、「**トポロジー**」メニューから「**log-test**」アプリにアクセスする
 
 ![alt text](<スクリーンショット 2025-01-10 15.39.27.png>)
+
+- ログを出力して遊んでみる
+
+![alt text](image-41.png)
+![alt text](<スクリーンショット 2025-01-10 16.09.55.png>)
+![alt text](image-42.png)
+
+## まとめ
+OpenShift Pipelinesを用いてパイプラインを作成しました。
