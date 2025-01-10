@@ -239,6 +239,7 @@ spec:
 
 ---
 **■補足：** 「**Trivy**」は軽量な脆弱性検知ツールで、コンテナイメージもスキャンできます。コンテナイメージのみならず、ManifestファイルやIaCのファイル（Terraform 等）もスキャンできます。DesktopやServerにインストールして利用することもできますが、TektonのTaskとしても実行可能です。
+
 ![alt text](image-27.png)
 
 なお、コンテナイメージをスキャンし、CVSSにて定義される深刻度(UNKNOWN、LOW、MEDIUM、HIGH、CRITICAL)からHIGH以上の脆弱性をチェック対象とする場合、以下のTrivyコマンドでスキャンすることが可能です。
