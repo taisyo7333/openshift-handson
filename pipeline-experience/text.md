@@ -45,7 +45,170 @@ Workspaceが無いと、**①**が完了すると、ダウンロードしてき�
 
 **■Task**
 - 任意のGitリポジトリからソースコードを`git clone`してくる
-- ソースコードからイメージをビルドする
-- ArgoCDアプリケーションを適用しアプリをデプロイ
+- ソースコードからイメージをビルドして内部レジストリに保存
+- GitリポジトリにおいてあるサンプルアプリのManifest一覧を適用する
 
-Githubに格納しているからImage Build→Deployまでを実現できるPipeline/Taskを作成し、投票サービスを実現する為のアプリ（Front / Back）の自動Deployを試してみます。
+![alt text](<スクリーンショット 2025-01-09 15.19.24.png>)
+```
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: workspace-pvc
+  #PVCの名称
+  namespace: myproject
+  #適用先のNameSpace名
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi
+  storageClassName: gp3-csi
+  #永続ボリュームを払い出すストレージシステム
+  #AWS環境のOpenShiftではAWS EBSが提供する「gp3-csi」というStorage Classが使える
+  volumeMode: Filesystem
+```
+## パイプライン作成とTaskの追加
+
+### パイプラインの新規作成
+- 「**Pipelines**」メニューの「作成」プルダウンから「Pipeline」を選択
+![alt text](image-2.png)
+
+### Taskを3つ追加
+- 「**Taskの追加**」をクリック
+
+![alt text](image-3.png)
+
+- 「**git-clone**」を追加
+
+![alt text](image-8.png)
+
+- 後に連続するTaskを追加
+
+![alt text](image-5.png)
+
+- 「**buildah**」を追加
+
+![alt text](image-17.png)
+
+---
+![alt text](image-26.png)
+「**Buildah**」はデーモンレスのビルドツールで、Red Hatが主導して開発しているOSSです。詳細は[こちら](https://www.redhat.com/ja/topics/containers/what-is-buildah)。
+（ブルドッグがパンツ被っているようなアイコンです）
+
+---
+
+- 「**Finaly Task**」を追加する
+
+![alt text](image-13.png)
+
+- 「**trivy-scanner**」を追加
+
+![alt text](image-18.png)
+
+### Workspaceを追加
+- 「**Add workspace**」をクリックし、名前欄に「`workspace`」と記載
+
+![alt text](image-9.png)
+![alt text](image-19.png)
+
+## パラメータの追加と設定
+各Taskを実行するには、各Task毎に設定値を設定する必要があります。例えば、`git-clone`タスクには「**GitリポジトリのURL**」を値として与える必要があります。
+
+ただし、Taskに各設定値をハードコーディングしてしまうと、「**特定のアプリにしか使えないパイプライン**」になってしまいます。このため、各TaskはPipeline側のパラメータを参照し、具体的な値はパイプライン実行時に与えるという設計を取るべきです。
+
+具体的な作業を通して、上記の内容をしっかり確認していきましょう。
+
+### パラメータを4つ追加
+- 「**Add parameter**」を4回クリックして4つのパラメータを追加する
+
+![alt text](image-21.png)
+
+### 各パラメータに名前:デフォルト値を設定する
+![alt text](image-20.png)
+
+|名前	|説明	|デフォルト値|
+|---|---|---|
+|GIT_URL|ソースコードを取ってくる先のGitリポジトリのURL|`https://gitlab.com/masaki-oomura/openshift-handson.git`|
+|DOCKERFILE_PATH|イメージをBuildする為のDockerfileのありかを示すパス|`./pipeline-experience/sample-app/source/Dockerfile`|
+|SOURCE_PATH|イメージをBuildする対象のアプリケーションのソースコードのありかを示すパス|`./pipeline-experience/sample-app/source`|
+|INTERNAL_REGISTRY_URL|コピー元の内部レジストリのURL|`image-registry.openshift-image-registry.svc:5000/myproject/log-test`|
+
+---
+**■補足：** 各パラメータの「**名前**」は任意のものを設定できます。ただし、万人が見てわかりやすいものを設定しましょう。
+
+**例：GitリポジトリのURL**
+- OK：GIT_URL, REPO_URL
+- NG：A, CLONE, URL
+
+また、必須ではありませんが、「**説明**」欄に各パラメータの意味を記載しておいてあげると、メンテナビリティの観点からも親切です。
+
+「**デフォルト値**」は、パイプライン実行時の設定値のデフォルト値として利用する値を入れます。空欄にしておいても構いません。
+
+---
+
+## 各Task毎の設定値にパラメータを参照させる
+ここから3つのTaskそれぞれに設定値を設定していきます。この際、設定値に直接値を入力せず、Pipeline側に設定されたパラメータを参照させます。
+
+### git-cloneの設定
+- 「**Tasks**」から当該Task名をクリック
+- 必須パラメータを設定する
+
+|パラメータ|詳細|設定するべき内容|
+|---|---|---|
+|url|Gitリポジトリのクローン先URL|`$(params.GIT_URL)`|
+
+![alt text](image-23.png)
+
+---
+**■補足：** urlに直接GitリポジトリのURLを入力（ハードコーディング）してしまうと、このアプリ以外で当該パイプラインを使えなくなってしまう。これはNGパターン。
+![alt text](image-24.png)
+
+---
+
+-  ワークスペース「output」に`workspace`を設定
+
+![alt text](image-22.png)
+
+### buildahの設定
+- 同様に必須パラメータを設定する
+
+|パラメータ|詳細|設定するべき内容|
+|---|---|---|
+|IMAGE|OpenShiftの内部イメージレジストリのPATH|`$(params.INTERNAL_REGISTRY_URL)`|
+|$(params.DOCKERFILE_PATH)|Dockerfileが置いてあるディレクトリ|`$(params.DOCKERFILE_PATH)`|
+|CONTEXT|ビルドするアプリのソースコードが置いてあるディレクトリ|`$(params.SOURCE_PATH)`|
+
+![alt text](<スクリーンショット 2025-01-10 14.29.01.png>)
+
+---
+**■補足①：** Tektonの各Taskは「[Tekton Hub](https://hub.tekton.dev/)」に詳細な使い方が記載されています。
+
+---
+
+---
+**■補足②：** OpenShiftクラスタ内には最初からイメージレジストリ（内部レジストリ）が作られています。内部レジストリの命名規則は以下の通りです。
+
+`image-registry.openshift-image-registry.svc:5000/<NameSpace名>/<アプリ名>`
+
+---
+- ワークスペース「source」に`workspace`を設定
+
+![alt text](image-25.png)
+
+### trivy-scannerの設定
+- 同様に必須パラメータを設定する
+- 「**ARGS**」欄で「**値の追加**」を2回クリック
+- 以下のように入力
+
+|パラメータ|詳細|設定するべき内容|
+|---|---|---|
+|ARGS|trivyコマンドを入力する欄|`image`<br>`--severity HIGH,CRITICAL`|
+|IMAGE_PATH|イメージスキャンする対象のコンテナイメージ格納先|`$(params.INTERNAL_REGISTRY_URL)`|
+
+![alt text](<スクリーンショット 2025-01-10 14.38.13.png>)
+
+---
+**■補足①：** Tektonの各Taskは「[Tekton Hub](https://hub.tekton.dev/)」に詳細な使い方が記載されています。
+
+---
