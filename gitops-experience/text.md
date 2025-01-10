@@ -4,10 +4,12 @@ OpenShift GitOpsを利用したGitOpsを体験しましょう。
 Kubernetesのあらゆるリソースは「**マニフェスト（Manifest）**」と呼ばれるコードで表現・管理することができます。Manifestは「**YAML**」と呼ばれる形式で記述されます。YAMLはインデントとKey:valueを用いた非常にシンプルな記法ですが、幅広いリソースを表現することができます。
 
 このYAMLファイルをGitリポジトリで管理し、編集結果を自動的にKubernetesクラスタに適用する方法論を「**GitOps**」と言います。Gitリポジトリには変更履歴や証跡管理（誰が、いつ、何を変更したか）が可能な機能があります。**GitOps**の実施は自動化に加えて「**セキュリティ・ガバナンスの確保**」という観点でも必須な、「**Kubernetesにおける開発運用のベストプラクティス**」です。
+
 ![alt text](image.png)
 
-![alt text](image-1.png)
 このGitOpsを実現するOSSとして非常に広く使われているのが「**ArgoCD**」です。Gitリポジトリに格納したManifestファイル（Single Source of Truth）を自動的にKubernetesクラスタに適用してくれます。
+
+![alt text](image-1.png)
 
 本パートを通してArgoCDの使い方や機能について基礎を押さえましょう。
 
@@ -54,7 +56,9 @@ OpenShiftおよびArgoCDにはそれぞれ独自の「**ロールベースのア
 先ほど確認したManifestをArgoCDアプリケーションからKubernetesクラスタに適用してもらいます。ArgoCDへの指示（ここにこんなManifestを適用してください）を「**ArgoCDアプリケーション**」と言います。ArgoCDアプリケーション自体もYAMLファイルで表現できます。
 
 ### ArgoCDアプリケーションを適用する
+
 ![alt text](<スクリーンショット 2025-01-08 14.43.25.png>)
+
 - ArgoCDのログイン後画面にて、左メニュー「**Applications**」をクリック
 - 「**+NEW APP**」をクリック
 - 「**EDIT AS YAML**」をクリックし、以下のYAMLファイルをコピペする
@@ -95,11 +99,14 @@ spec:
 - 「**SAVE**」をクリックし、ArgoCDのGUIにYAMLファイルが反映された結果を確認してみる
 
 ![alt text](image-5.png)
+
 - 「**CREATE**」をクリックしてManifestを適用する
 - Manifestが反映されたことを確認する
 
 ![alt text](image-6.png)
+
 ![alt text](image-7.png)
+
 ---
 **■補足：** ArgoCD側にも独自の論理空間を有しており、その名称を「**Project**」と言います。これがOpenShiftの論理空間（NameSpace）である「プロジェクト」と同名で非常にややこしいです。このため、ArgoCD側のProjectを「ArgoCDプロジェクト」と表現したりします。ArgoCDプロジェクトは最初から`default`というプロジェクトが存在します。今回はこれを使います。
 ![alt text](image-4.png)
@@ -110,7 +117,9 @@ spec:
 RouteのURLからサンプルアプリケーションにアクセスしてみましょう。また、Deploymentで設定されている環境変数を触ってみて、泡の色を変えましょう。
 
 ### bgdアプリにアクセス
+
 ![alt text](image-8.png)
+
 - コンソール画面を「**開発者向け表示**」に切り替え、左メニューの「**トポロジー**」を選択
 - プロジェクト「**bgd**」内の「**bgd**」アプリのRoute URLをクリック
 - アプリにアクセスする
@@ -155,10 +164,12 @@ OpenShiftクラスタに適用されているDeploymentと、Gitリポジトリ�
 - 「**SYNC STATUS**」がOutOfSyncになっている事を確認
 
 ![alt text](image-11.png)
+
 - 画面上部「**SYNC**」 → 「**SYNCHRONIZE**」をクリック
 「**SYNC STATUS**」がSyncedとなったことを確認
 
 ![alt text](image-12.png)
+
 ### 矯正結果を確認
 - サンプルアプリ画面を更新し、泡の色が青（`blue`）に戻っていることを確認
 - 「**(D)bgd-app**」の環境タブも再度確認し、`COLOR:blue`に戻っていることを確認
