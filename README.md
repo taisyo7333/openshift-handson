@@ -8,5 +8,5 @@
 3. [ソースコードからアプリケーションをデプロイ](https://gitlab.com/masaki-oomura/openshift-handson/-/blob/main/deploy-from-source/text.md?ref_type=heads)
 4. [Operatorをインストール](https://gitlab.com/masaki-oomura/openshift-handson/-/blob/main/operator-installing/text.md?ref_type=heads)
 5. [永続ボリュームを使う](https://gitlab.com/masaki-oomura/openshift-handson/-/blob/main/use-persistentvolume/text.md?ref_type=heads)
-6. [GitOpsを体験]https://gitlab.com/masaki-oomura/openshift-handson/-/blob/main/gitops-experience/text.md?ref_type=heads)
+6. [GitOpsを体験](https://gitlab.com/masaki-oomura/openshift-handson/-/blob/main/gitops-experience/text.md?ref_type=heads)
 7. [Pipeline作成を体験](https://gitlab.com/masaki-oomura/openshift-handson/-/blob/main/pipeline-experience/text.md?ref_type=heads)

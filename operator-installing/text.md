@@ -49,3 +49,6 @@
 - デフォルト設定のままインストール
 - 「**Webコンソールの更新**」が表示されるのでクリックして画面を更新
 - コンソールの左メニューに「パイプライン」という項目が追加され、OpenShift Pipelinesが利用可能になる
+
+## 目次へ戻る
+[こちら](https://gitlab.com/masaki-oomura/openshift-handson/-/blob/main/README.md?ref_type=heads)

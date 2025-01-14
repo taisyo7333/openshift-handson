@@ -78,3 +78,6 @@ RHCOS（Red Hat Enterprise Linux Core OS）は、RHELと共通のカーネルに
 
 ## まとめ
 S2Iを利用することで、アプリケーションのソースコードから自動的にコンテナイメージをビルドし、デプロイまで実施することができました。また、Routeの設定を変更し、アプリケーションの負荷分散を実現できました。
+
+## 目次へ戻る
+[こちら](https://gitlab.com/masaki-oomura/openshift-handson/-/blob/main/README.md?ref_type=heads)

@@ -375,3 +375,6 @@ oc apply -f https://gitlab.com/masaki-oomura/openshift-handson/-/raw/main/pipeli
 OpenShift Pipelinesを用いてパイプラインを作成しました。また、GitOpsと組み合わせて本格的なCI/CDを実現しました。
 
 ![alt text](image-43.png)
+
+## 目次へ戻る
+[こちら](https://gitlab.com/masaki-oomura/openshift-handson/-/blob/main/README.md?ref_type=heads)
