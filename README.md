@@ -2,7 +2,7 @@
 　このハンズオンコンテンツはOpenShiftの初心者向けコンテンツです。OpenShiftを実際に操作しながら理解を深めていきましょう。
 
 # 構成
-0. [OpenShiftの基礎知識]()
+0. [OpenShiftの基礎知識](https://gitlab.com/masaki-oomura/openshift-handson/-/blob/main/openshift-base-knowledge/text.md?ref_type=heads)
 1. [OpenShiftの画面コンソールツアー](https://gitlab.com/masaki-oomura/openshift-handson/-/blob/main/openshift-console-tour/text.md?ref_type=heads)
 2. [イメージからアプリケーションをデプロイ](https://gitlab.com/masaki-oomura/openshift-handson/-/blob/main/deploy-from-image/text.md?ref_type=heads)
 3. [ソースコードからアプリケーションをデプロイ](https://gitlab.com/masaki-oomura/openshift-handson/-/blob/main/deploy-from-source/text.md?ref_type=heads)
