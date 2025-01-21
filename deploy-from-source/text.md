@@ -16,11 +16,16 @@ GitHubに置いてあるソースコードから、Source to Image (S2I) を利�
 - 左の「**+追加**」をクリック
 - 「**Gitからのインポート**」をクリック
 - 「**Gitリポジトリー URL**」にGitリポジトリのURLを入力
-    - `https://github.com/openshift-instruqt/blog-django-py`
+```
+https://github.com/openshift-instruqt/blog-django-py
+```
 - 「**インポートストラテジーの編集**」をクリック
 - 「**Builder Image**」を選択
 - 「**Python 3.9 (UBI 8)**」が自動的に選ばれているか確認
-- アプリケーションから「**アプリケーショングループの作成**」をクリック、「**blog-django-py**」と入力
+- アプリケーションから「**アプリケーショングループの作成**」をクリックし、以下のように入力
+```
+blog-django-py
+```
 - 「**作成**」をクリック
 
 ---
@@ -67,10 +72,10 @@ RHCOS（Red Hat Enterprise Linux Core OS）は、RHELと共通のカーネルに
 - 「**アノテーション**」をクリック
 「**+追加する**」を2回クリックし、以下2つのkey:valueを追加する
 
-| key | value |
-| ---- | ---- |
-| `haproxy.router.openshift.io/balance` | `roundrobin` |
-| `haproxy.router.openshift.io/disable_cookies` | `true` |
+| key | value |設定内容|
+| ---- | ---- |---- |
+| `haproxy.router.openshift.io/balance` | `roundrobin` |ラウンドロビン方式とする設定
+| `haproxy.router.openshift.io/disable_cookies` | `true` |Cookie無効化の設定|
 
 ![alt text](<スクリーンショット 2025-01-07 16.52.27.png>)
 - 「**保存**」をクリック
