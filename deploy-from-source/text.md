@@ -78,7 +78,7 @@ RHCOS（Red Hat Enterprise Linux Core OS）は、RHELと共通のカーネルに
 | `haproxy.router.openshift.io/disable_cookies` | `true` |Cookie無効化の設定|
 
 
-![alt text](<スクリーンショット 2025-01-07 16.52.27.png>)
+![alt text](image-7.png)
 
 ---
 ※簡単コピペ用
