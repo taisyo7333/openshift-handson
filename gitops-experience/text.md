@@ -5,7 +5,7 @@ Kubernetesのあらゆるリソースは「**マニフェスト（Manifest）**�
 
 このYAMLファイルをGitリポジトリで管理し、編集結果を自動的にKubernetesクラスタに適用する方法論を「**GitOps**」と言います。Gitリポジトリには変更履歴や証跡管理（誰が、いつ、何を変更したか）が可能な機能があります。**GitOps**の実施は自動化に加えて「**セキュリティ・ガバナンスの確保**」という観点でも必須な、「**Kubernetesにおける開発運用のベストプラクティス**」です。
 
-![alt text](image.png)
+![alt text](image-15.png)
 
 このGitOpsを実現するOSSとして非常に広く使われているのが「**ArgoCD**」です。Gitリポジトリに格納したManifestファイル（Single Source of Truth）を自動的にKubernetesクラスタに適用してくれます。
 
@@ -55,6 +55,10 @@ OpenShiftおよびArgoCDにはそれぞれ独自の「**ロールベースのア
 ## ArgoCDからManifestを適用してもらう
 先ほど確認したManifestをArgoCDアプリケーションからKubernetesクラスタに適用してもらいます。ArgoCDへの指示（ここにこんなManifestを適用してください）を「**ArgoCDアプリケーション**」と言います。ArgoCDアプリケーション自体もYAMLファイルで表現できます。
 
+![alt text](image-16.png)
+
+![alt text](image-17.png)
+
 ### ArgoCDアプリケーションを適用する
 
 ![alt text](<スクリーンショット 2025-01-08 14.43.25.png>)
@@ -63,6 +67,7 @@ OpenShiftおよびArgoCDにはそれぞれ独自の「**ロールベースのア
 - 「**+NEW APP**」をクリック
 - 「**EDIT AS YAML**」をクリックし、以下のYAMLファイルをコピペする
 ```
+
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
@@ -96,6 +101,9 @@ spec:
      selfHeal: false
      #Single Sourth of TruthとClusterの情報の不整合を自動矯正”しない”設定
 ```
+
+![alt text](image-18.png)
+
 - 「**SAVE**」をクリックし、ArgoCDのGUIにYAMLファイルが反映された結果を確認してみる
 
 ![alt text](image-5.png)

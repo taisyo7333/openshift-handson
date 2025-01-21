@@ -14,13 +14,11 @@ Tektonパイプラインを構成する主な要素は以下の3つです。
 ### Pipeline
 Pipelineとは、後述する「Task」の順序性や「Workspace」との紐づけを行い、「このTaskをやってOKだったら次はこのTaskを実行して...」を管理する存在です。また、各Taskに適用するパラメータ（変数）を定義します。
 
-これらの要素を図解すると以下のようになります。
-
 ![alt text](image.png)
 
 ### Task
 Taskは、文字通り何らかの作業です。例えば以下のようなTaskが存在します。
-- Gitリポジトリに保存されているソースコードを`git clone`（ダウンロード）してくる
+- Gitリポジトリからソースコードをダウンロードしてくる
 - ソースコードをスキャンする
 - コンテナイメージをビルドする
 - コンテナイメージをスキャンする
@@ -33,7 +31,7 @@ Taskは、文字通り何らかの作業です。例えば以下のようなTask
 ### Workspace
 Podとして起動・実行される各Taskは、Task終了時にPodが消えてしまいますので、その間に生成されたデータも消えてしまいます。
 
-例えば、「**① ソースコードを`git clone`（ダウンロード）してくるTask**」の後に、「**② ソースコードを静的解析するTask**」を実行したい場合を考えてみます。
+例えば、**① ソースコードをダウンロードするTask**」の後に、「**② ソースコードをスキャンするTask**」を実行したい場合を考えてみます。
 
 Workspaceが無いと、**①**が完了すると、ダウンロードしてきたソースコードが消えてしまいます。そうすると次の**②**が実施できません。それは困ります。
 
@@ -91,9 +89,6 @@ spec:
   resources:
     requests:
       storage: 1Gi
-  storageClassName: gp3-csi
-  #永続ボリュームを払い出すストレージシステム
-  #AWS環境のOpenShiftではAWS EBSが提供する「gp3-csi」というStorage Classが使える
   volumeMode: Filesystem
 ```
 ---
@@ -101,6 +96,7 @@ spec:
 
 ### パイプラインの新規作成
 - 「**Pipelines**」メニューの「作成」プルダウンから「Pipeline」を選択
+
 ![alt text](image-2.png)
 
 ### Taskを3つ追加
@@ -123,6 +119,7 @@ spec:
 ---
 **■補足：** 「**Buildah**」はデーモンレスのビルドツールで、Red Hatが主導して開発しているOSSです。詳細は[こちら](https://www.redhat.com/ja/topics/containers/what-is-buildah)。
 （ブルドッグがパンツ被っているようなアイコンです）
+
 ![alt text](image-26.png)
 
 
@@ -140,6 +137,7 @@ spec:
 - 「**Add workspace**」をクリックし、名前欄に「`workspace`」と記載
 
 ![alt text](image-9.png)
+
 ![alt text](image-19.png)
 
 ## パラメータの追加と設定
@@ -157,6 +155,7 @@ spec:
 ![alt text](image-21.png)
 
 ### 各パラメータに名前:デフォルト値を設定する
+
 ![alt text](image-20.png)
 
 |名前	|説明	|デフォルト値|
@@ -194,6 +193,7 @@ spec:
 
 ---
 **■補足：** urlに直接GitリポジトリのURLを入力（ハードコーディング）してしまうと、このアプリ以外で当該パイプラインを使えなくなってしまう。これはNGパターン。
+
 ![alt text](image-24.png)
 
 ---
@@ -359,6 +359,7 @@ oc apply -f https://gitlab.com/masaki-oomura/openshift-handson/-/raw/main/pipeli
 - ArgoCDの「**Applications**」メニューで、「**log-test**」アプリのSync状態を確認する
 
 ![alt text](<スクリーンショット 2025-01-10 15.36.13.png>)
+
 ![alt text](image-34.png)
 
 - OpenShiftのコンソール画面にて、「**トポロジー**」メニューから「**log-test**」アプリにアクセスする
@@ -368,7 +369,9 @@ oc apply -f https://gitlab.com/masaki-oomura/openshift-handson/-/raw/main/pipeli
 - ログを出力して遊んでみる
 
 ![alt text](image-41.png)
+
 ![alt text](<スクリーンショット 2025-01-10 16.09.55.png>)
+
 ![alt text](image-42.png)
 
 ## まとめ
