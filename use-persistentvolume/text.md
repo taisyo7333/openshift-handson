@@ -24,27 +24,27 @@ Mysqlコンテナをアプリケーションとしてデプロイするための
 - 開発者表示でNameSpace「**myproject**」を選択
 - 「**Web Terminal**」を起動し、以下のコマンドを適用してManifest一式を適用し、各種リソースを作成する
 
-**■ Manifestを適用するProjectを「myproject」に切り替える**
+① Manifestを適用するProjectを「myproject」に切り替える
 ```
 oc project myproject
 ```
 ---
-**■ Deploymentを適用する**
+② Deploymentを適用する
 ```
 oc apply -f https://gitlab.com/masaki-oomura/mysql-k8s-demo/-/raw/main/manifest/mysql-deployment.yaml
 ```
 ---
-**■ PVCを適用する**
+③ PVCを適用する
 ```
 oc apply -f https://gitlab.com/masaki-oomura/mysql-k8s-demo/-/raw/main/manifest/mysql-pvc.yaml
 ```
 ---
-**■ Secretを適用する**
+④ Secretを適用する
 ```
 oc apply -f https://gitlab.com/masaki-oomura/mysql-k8s-demo/-/raw/main/manifest/mysql-secret.yaml
 ```
 ---
-**■ Serviceを適用する**
+⑤ Serviceを適用する
 ```
 oc apply -f https://gitlab.com/masaki-oomura/mysql-k8s-demo/-/raw/main/manifest/mysql-service.yaml
 ```
@@ -146,7 +146,12 @@ Mysqlの内部に保存されていたデータはPVに保存されています�
 ### Deploymentからストレージを追加
 - 「**(D)mysql**」の「**アクション**」から「**ストレージの追加**」をクリック
 - 「**PersistentVolumeClaim**」で「**既存の要求を仕様**」をチェック、先程Applyした「**mysql-pvc**」を選択
-- マウントパスはDeploymentに記載した「`/var/lib/mysql`」を入力
+- マウントパスはDeploymentに記載し以下を入力
+
+```
+/var/lib/mysql
+```
+
 - 「**保存**」をクリック
 - 再度Podが再作成されることを確認
 
@@ -157,19 +162,16 @@ Mysqlの内部に保存されていたデータはPVに保存されています�
 
 ### データが復活したことを確認
 - 「Podの詳細画面」で「ターミナル」タブをクリック
-- MySQLにrootログインし、DB&TBLの復活を確認
+- MySQLにrootログイン
+```
+mysql -uroot
+```
+- DB&TBLの復活を確認
+```
+SELECT * FROM movie.ghibli;
+```
 
-```
-sh-5.1$ mysql -uroot
-...
-mysql> SELECT * FROM movie.ghibli;
-+----+--------------+-----------------------------------+----------------+
-| id | release_year | title                             | director_name  |
-+----+--------------+-----------------------------------+----------------+
-|  1 |         1984 | Nausica of the Valley of the Wind | Hayao Miyazaki |
-+----+--------------+-----------------------------------+----------------+
-1 row in set (0.02 sec)
-```
+![alt text](image-7.png)
 
 ## まとめ
 Kubernetesにおける永続ボリュームの仕組みを理解し、Mysqlコンテナを通して実機での挙動を確認しました。PVをつけ外ししてデータが消えたり復活したりする様を見ることができました。
