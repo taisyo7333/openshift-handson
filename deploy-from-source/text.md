@@ -77,6 +77,23 @@ RHCOS（Red Hat Enterprise Linux Core OS）は、RHELと共通のカーネルに
 | `haproxy.router.openshift.io/balance` | `roundrobin` |ラウンドロビン方式とする設定
 | `haproxy.router.openshift.io/disable_cookies` | `true` |Cookie無効化の設定|
 
+---
+※簡単コピペ用
+```
+haproxy.router.openshift.io/balance
+```
+```
+roundrobin
+```
+```
+haproxy.router.openshift.io/disable_cookies
+```
+```
+true
+```
+
+---
+
 ![alt text](<スクリーンショット 2025-01-07 16.52.27.png>)
 - 「**保存**」をクリック
 - blog-django-pyアプリ画面を更新して、Pod名が切り替わる事を確認する
