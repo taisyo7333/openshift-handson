@@ -246,3 +246,6 @@ OpenShift AIによって、大規模言語モデル（LLM）やニューラル�
 Red Hat OpenShiftを活用すれば、あらゆるインフラの上であらゆる種類のワークロードを展開し、クラウドネイティブな開発環境や自動化の推進が実現できます。
 
 ![alt text](image-16.png)
+
+## 目次へ戻る
+[こちら](https://gitlab.com/masaki-oomura/openshift-handson/-/blob/main/README.md?ref_type=heads)
