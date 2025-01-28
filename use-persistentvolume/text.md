@@ -133,8 +133,10 @@ Mysqlのデータを永続化しているPVを外してみます。その時Mysq
     mysql -uroot
     ```
     ```
+    show databases;
+    ```
+    ```
     ...
-    mysql> show databases;
     +--------------------+
     | Database           |
     +--------------------+
