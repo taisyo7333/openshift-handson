@@ -109,10 +109,30 @@ Mysql内にDatabaseとTableを作成します。これらデータはPVに保存
     show databases;
     ```
     ```
+    mysql> show databases;
+    +--------------------+
+    | Database           |
+    +--------------------+
+    | information_schema |
+    | movie              |
+    | mysql              |
+    | performance_schema |
+    | sys                |
+    +--------------------+
+    5 rows in set (0.01 sec)
+    ```
 - 以下のSQLで作成したTBLの中身を確認
-
     ```
     SELECT * FROM movie.ghibli;
+    ```
+    ```
+    mysql> SELECT * FROM movie.ghibli;
+    +----+--------------+-----------------------------------+----------------+
+    | id | release_year | title                             | director_name  |
+    +----+--------------+-----------------------------------+----------------+
+    |  1 |         1984 | Nausica of the Valley of the Wind | Hayao Miyazaki |
+    +----+--------------+-----------------------------------+----------------+
+    1 row in set (0.01 sec)
     ```
 
 ![alt text](image-4.png)
@@ -134,7 +154,6 @@ Mysqlのデータを永続化しているPVを外してみます。その時Mysq
 ### データが消えた事を確認
 - 「**Podの詳細画面**」で「**ターミナル**」タブをクリック
 - MySQLにrootログインし、Databaseが消えたことを確認
-
     ```
     mysql -uroot
     ```
@@ -142,17 +161,21 @@ Mysqlのデータを永続化しているPVを外してみます。その時Mysq
     show databases;
     ```
     ```
-    ...
+    mysql> show databases;
     +--------------------+
     | Database           |
     +--------------------+
     | information_schema |
-    | mysql              |
+    | mysql              | ← movieが消えている
     | performance_schema |
     | sys                |
     +--------------------+
     4 rows in set (0.00 sec)
-
+    ```
+    ```
+    SELECT * FROM movie.ghibli;
+    ```
+    ```
     mysql> SELECT * FROM movie.ghibli;
     ERROR 1049 (42000): Unknown database 'movie'
     ```
@@ -187,10 +210,32 @@ Mysqlの内部に保存されていたデータはPVに保存されています�
     ```
 - DB&TBLの復活を確認
     ```
-    mysql -uroot
-    ```
-    ```
     show databases;
+    ```
+    ```
+    mysql> show databases;
+    +--------------------+
+    | Database           |
+    +--------------------+
+    | information_schema |
+    | movie              | ← movieが復活している
+    | mysql              |
+    | performance_schema |
+    | sys                |
+    +--------------------+
+    5 rows in set (0.01 sec)
+    ```
+    ```
+    SELECT * FROM movie.ghibli;
+    ```
+    ```
+    mysql> SELECT * FROM movie.ghibli;
+    +----+--------------+-----------------------------------+----------------+
+    | id | release_year | title                             | director_name  |
+    +----+--------------+-----------------------------------+----------------+
+    |  1 |         1984 | Nausica of the Valley of the Wind | Hayao Miyazaki |
+    +----+--------------+-----------------------------------+----------------+
+    1 row in set (0.01 sec)
     ```
 
 ![alt text](image-7.png)
