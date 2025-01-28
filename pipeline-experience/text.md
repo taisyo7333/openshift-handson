@@ -155,7 +155,7 @@ PVCのスペックは以下の通り。
   workspace
   ```
 
-![alt text](image-9.png)
+![alt text](<スクリーンショット 2025-01-28 16.36.38.png>)
 
 ## パラメータの追加と設定
 各Taskを実行するには、各Task毎に設定値を設定する必要があります。例えば、`git-clone`タスクには「**GitリポジトリのURL**」を値として与える必要があります。
@@ -175,13 +175,26 @@ PVCのスペックは以下の通り。
 
 ![alt text](image-20.png)
 
-|名前	|説明	|デフォルト値|
-|---|---|---|
-|GIT_URL|ソースコードを取ってくる先のGitリポジトリのURL|`https://gitlab.com/masaki-oomura/openshift-handson.git`|
-|DOCKERFILE_PATH|イメージをBuildする為のDockerfileのありかを示すパス|`./pipeline-experience/sample-app/source/Dockerfile`|
-|SOURCE_PATH|イメージをBuildする対象のアプリケーションのソースコードのありかを示すパス|`./pipeline-experience/sample-app/source`|
-|INTERNAL_REGISTRY_URL|コピー元の内部レジストリのURL|`image-registry.openshift-image-registry.svc:5000/myproject/log-test`|
+  |名前	|説明	|デフォルト値|
+  |---|---|---|
+  |GIT_URL|ソースコードを取ってくる先のGitリポジトリのURL|`https://gitlab.com/masaki-oomura/openshift-handson.git`|
+  |DOCKERFILE_PATH|イメージをBuildする為のDockerfileのありかを示すパス|`./pipeline-experience/sample-app/source/Dockerfile`|
+  |SOURCE_PATH|イメージをBuildする対象のアプリケーションのソースコードのありかを示すパス|`./pipeline-experience/sample-app/source`|
+  |INTERNAL_REGISTRY_URL|コピー元の内部レジストリのURL|`image-registry.openshift-image-registry.svc:5000/myproject/log-test`|
 
+  **デフォルト値**
+  ```
+  `https://gitlab.com/masaki-oomura/openshift-handson.git
+  ```
+  ```
+  ./pipeline-experience/sample-app/source/Dockerfile
+  ```
+  ```
+  ./pipeline-experience/sample-app/source
+  ```
+  ```
+  image-registry.openshift-image-registry.svc:5000/myproject/log-test
+  ```
 ---
 **■補足：** 各パラメータの「**名前**」は任意のものを設定できます。ただし、万人が見てわかりやすいものを設定しましょう。
 
