@@ -104,7 +104,13 @@ Mysql内にDatabaseとTableを作成します。これらデータはPVに保存
 ---
 
 ### 作成したTBLを確認
-- 以下のSQLで確認
+- 以下のSQLで作成したDBを確認
+    ```
+    show databases;
+    ```
+    ```
+- 以下のSQLで作成したTBLの中身を確認
+
     ```
     SELECT * FROM movie.ghibli;
     ```
@@ -156,6 +162,9 @@ Mysqlの内部に保存されていたデータはPVに保存されています�
 
 ### Deploymentからストレージを追加
 - 「**(D)mysql**」の「**アクション**」から「**ストレージの追加**」をクリック
+
+![alt text](<スクリーンショット 2025-01-28 12.35.52.png>)
+
 - 「**PersistentVolumeClaim**」で「**既存の要求を仕様**」をチェック、先程Applyした「**mysql-pvc**」を選択
 - マウントパスはDeploymentに記載し以下を入力
     ```
@@ -164,8 +173,6 @@ Mysqlの内部に保存されていたデータはPVに保存されています�
 
 - 「**保存**」をクリック
 - 再度Podが再作成されることを確認
-
-![alt text](image-6.png)
 
 ---
 **■補足：** `/var/lib/mysql`はLinuxにインストールされたMysqlアプリケーションのデータが保存されるPATHです。
