@@ -12,11 +12,23 @@
 
 ### Web Terminalをインストール
 - `Web Terminal`を検索
+
+```
+Web Terminal
+```
+
 - デフォルト設定のままインストール
 - 画面右上に出てくる「>_」をクリックして初期化し、Web Terminalを利用可能にする
 
 ![alt text](image.png)
 ![alt text](<スクリーンショット 2025-01-07 17.25.55.png>)
+
+- `oc version`と入力し、ocコマンドが利用できることを確認しておく
+
+```
+oc version
+```
+
 
 ## OpenShift GitOps Operator
 「**OpenShift GitOps Operator**」は、Red Hatが提供するOperatorです。OSS（オープン・ソース・ソフトウェア）の「**ArgoCD**」をRed Hatのサポート付きで利用できるOperatorです。
@@ -28,6 +40,11 @@
 ### OperatorHubに移動して検索
 - 先ほどと同様に「Operator Hub」を選択
 - `OpenShift GitOps`を検索
+
+```
+OpenShift GitOps
+```
+
 - デフォルト設定のままインストール
 - 「**Webコンソールの更新**」が表示されるのでクリックして画面を更新
 - 画面右上の「アプリケーションタイル」からアクセスし、OpenShiftのSSOでログインしてみる
@@ -38,10 +55,13 @@
 
 ## OpenShift Pipelines Operator
 「**OpenShift Pipelines Operator**」は、Red Hatが提供するOperatorです。OSS（オープン・ソース・ソフトウェア）の「**Tekton**」をRed Hatのサポート付きで利用できるOperatorです。
+
 ---
 **■補足：** 「**Pipeline**」とは、CI/CD（継続的インテグレーションとデリバリー）の自動化を実現するためのワークフローを定義する仕組みです。TektonははKubernetesネイティブなPipeline管理ツールとして幅広く利用されています。
 
 ![alt text](image-4.png)
+
+---
 
 ### OperatorHubに移動して検索
 - 先ほどと同様に「Operator Hub」を選択
