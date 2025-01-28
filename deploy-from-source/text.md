@@ -56,7 +56,7 @@ RHCOS（Red Hat Enterprise Linux Core OS）は、RHELと共通のカーネルに
 - 「**Route**」をクリック、アプリにアクセス
 
 ---
-■補足：ブログアプリケーションには、現在アクセスしているPod名が表示されます。
+**■ 補足：** ブログアプリケーションには、現在アクセスしているPod名が表示されます。
 ![alt text](image-3.png)
 ![alt text](image-4.png)
 
@@ -66,6 +66,7 @@ RHCOS（Red Hat Enterprise Linux Core OS）は、RHELと共通のカーネルに
 ### アプリのPod数を増やす
 - 「**トポロジー画面**」からblog-django-pyアプリのアイコンをクリック
 - 「**詳細**」タブでPod数をお好きな数増やす
+- コンテナ（Pod）のインスタンスは仮想マシンに比べて短い時間でスケールアウトすることを確認してください。
 
 ![alt text](image-5.png)
 
