@@ -47,6 +47,27 @@ OpenShift GitOps
 
 - デフォルト設定のままインストール
 - 「**Webコンソールの更新**」が表示されるのでクリックして画面を更新
+
+### 事前準備（おまじない）
+Web Terminalから以下のコマンドを実行しておいてください。
+```
+oc create -f - <<EOF
+apiVersion: user.openshift.io/v1
+kind: Group
+metadata:
+  name: cluster-admins
+users:
+  - cluster-admin
+EOF
+```
+
+---
+
+**■ ArgoCDとOpenShiftのRBACの関係** <br>
+OpenShiftおよびArgoCDにはそれぞれ独自の「**ロールベースのアクセス制御（RBAC）**」を設定可能です。OpenShift GitOpsのデフォルト設定では、「OpenShift側のユーザが`cluster-admins`というグループに属するユーザにArgoCDのadmin権限を付与する」という設定になっています。そのため、自身のcluster-admin権限を持つユーザを当該グループに入れる設定を行います
+
+---
+
 - 画面右上の「アプリケーションタイル」からアクセスし、OpenShiftのSSOでログインしてみる
 
 ![alt text](image-1.png)

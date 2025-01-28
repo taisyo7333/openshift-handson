@@ -36,22 +36,6 @@ GitHubにアップロードされているサンプルアプリケーション�
     - [bgd-svc.yaml](https://raw.githubusercontent.com/redhat-developer-demos/openshift-gitops-examples/refs/heads/main/apps/bgd/overlays/bgd/bgd-svc.yaml)：アプリケーションをクラスタ内に公開する通信窓口を提供するService
     - [bgd-route.yaml](https://raw. githubusercontent.com/redhat-developer-demos/openshift-gitops-examples/refs/heads/main/apps/bgd/overlays/bgd/bgd-route.yaml)：インターネットに公開するためのRoute
 
-## 事前準備（おまじない）
-Web Terminalから以下のコマンドを実行しておいてください。
-```
-oc create -f - <<EOF
-apiVersion: user.openshift.io/v1
-kind: Group
-metadata:
-  name: cluster-admins
-users:
-  - cluster-admin
-EOF
-```
----
-**■ ArgoCDとOpenShiftのRBACの関係** <br>
-OpenShiftおよびArgoCDにはそれぞれ独自の「**ロールベースのアクセス制御（RBAC）**」を設定可能です。OpenShift GitOpsのデフォルト設定では、「OpenShift側のユーザが`cluster-admins`というグループに属するユーザにArgoCDのadmin権限を付与する」という設定になっています。そのため、自身のcluster-admin権限を持つユーザを当該グループに入れる設定を行います
-
 ## ArgoCDからManifestを適用してもらう
 先ほど確認したManifestをArgoCDアプリケーションからKubernetesクラスタに適用してもらいます。ArgoCDへの指示（ここにこんなManifestを適用してください）を「**ArgoCDアプリケーション**」と言います。ArgoCDアプリケーション自体もYAMLファイルで表現できます。
 
