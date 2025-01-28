@@ -226,6 +226,7 @@ PVCのスペックは以下の通り。
   |---|---|---|
   |url|Gitリポジトリのクローン先URL|`$(params.GIT_URL)`|
 
+  **url**
   ```
   $(params.GIT_URL)
   ```
@@ -244,7 +245,11 @@ PVCのスペックは以下の通り。
 ![alt text](image-22.png)
 
 ### buildahの設定
-- 同様に必須パラメータを設定する
+- パラメータ「**BUILD_ARGS**」を削除しておく
+
+  ![alt text](image-44.png)
+
+- 以下のパラメータを設定する
 
   |パラメータ|詳細|設定するべき内容|
   |---|---|---|
@@ -252,12 +257,15 @@ PVCのスペックは以下の通り。
   |DOCKERFILE_PATH|Dockerfileが置いてあるディレクトリ|`$(params.DOCKERFILE_PATH)`|
   |CONTEXT|ビルドするアプリのソースコードが置いてあるディレクトリ|`$(params.SOURCE_PATH)`|
 
+  **IMAGE**
   ```
   $(params.INTERNAL_REGISTRY_URL)
   ```
+  **DOCKERFILE**
   ```
   $(params.DOCKERFILE_PATH)
   ```
+  **CONTEXT**
   ```
   $(params.SOURCE_PATH)
   ```
@@ -283,12 +291,14 @@ PVCのスペックは以下の通り。
   |ARGS|trivyコマンドを入力する欄|`image`<br>`--severity HIGH,CRITICAL`|
   |IMAGE_PATH|イメージスキャンする対象のコンテナイメージ格納先|`$(params.INTERNAL_REGISTRY_URL)`|
 
+  **ARGS**
   ```
   image
   ```
   ```
   --severity HIGH,CRITICAL
   ```
+  **IMAGE_PATH**
   ```
   $(params.INTERNAL_REGISTRY_URL)
   ```
