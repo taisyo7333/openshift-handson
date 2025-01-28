@@ -112,6 +112,9 @@ PVCのスペックは以下の通り。
 ![alt text](image-3.png)
 
 - 「**git-clone**」を追加
+  ```
+  git-clone
+  ```
 
 ![alt text](image-8.png)
 
@@ -120,6 +123,9 @@ PVCのスペックは以下の通り。
 ![alt text](image-5.png)
 
 - 「**buildah**」を追加
+  ```
+  buildah
+  ```
 
 ![alt text](image-17.png)
 
@@ -137,6 +143,9 @@ PVCのスペックは以下の通り。
 ![alt text](image-13.png)
 
 - 「**trivy-scanner**」を追加
+  ```
+  trivy-scanner
+  ```
 
 ![alt text](image-18.png)
 
