@@ -187,7 +187,10 @@ Mysqlの内部に保存されていたデータはPVに保存されています�
     ```
 - DB&TBLの復活を確認
     ```
-    SELECT * FROM movie.ghibli;
+    mysql -uroot
+    ```
+    ```
+    show databases;
     ```
 
 ![alt text](image-7.png)
