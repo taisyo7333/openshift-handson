@@ -364,6 +364,11 @@ trivy image IMAGE_NAME --severity HIGH,CRITICAL
 ## ArgoCDアプリケーションを適用してアプリをデプロイ
 ここまでの作業で作成・実行したパイプラインを使い、コンテナイメージのビルドとスキャンが完了しました。このイメージを使ってアプリケーションをデプロイします。デプロイはArgoCDアプリケーションを利用しましょう。
 
+今回用意してあるマニフェストの一覧は以下の通りです。
+- dployment.yaml
+- service.yaml
+- route.yaml
+
 ### log-testアプリのArgoCDアプリケーションを確認しておく
 - [./pipeline-experience/sample-app/argocd-app/argocd-app.yaml](https://gitlab.com/masaki-oomura/openshift-handson/-/blob/main/pipeline-experience/sample-app/argocd-app/argocd-app.yaml)にアクセスする
 
