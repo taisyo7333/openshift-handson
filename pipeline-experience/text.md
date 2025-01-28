@@ -64,22 +64,13 @@ Podとして起動・実行される各Taskは、Task終了時にPodが消えて
 - OpenShiftのコンソール画面（開発者向け表示）にて、プロジェクトを「**myproject**」にする
 - 以下のコマンドをWeb  Terminalで実行し、PVCを作成する
   ```
-  oc apply -f 
-
-  |項目|設定内容|
-  |---|---|
-  |PersistentVolumeClaim 名|`workspace-pvc`|
-  |サイズ|`1` GiB|
-
+  oc apply -f  https://gitlab.com/masaki-oomura/openshift-handson/-/raw/main/pipeline-experience/workspace-pvc.yaml
   ```
-  workspace-pvc
-  ```
-
-
-![alt text](<スクリーンショット 2025-01-09 15.19.24.png>)
 
 ---
-**■補足：** YAMLファイルで作成する場合は以下のような内容になる。
+
+**■補足：** YAMLファイルの中身は以下の通り。
+
 ```
 kind: PersistentVolumeClaim
 apiVersion: v1
@@ -96,7 +87,18 @@ spec:
       storage: 1Gi
   volumeMode: Filesystem
 ```
+
+PVCのスペックは以下の通り。
+
+|項目|設定内容|
+|---|---|
+|PersistentVolumeClaim 名|`workspace-pvc`|
+|サイズ|`1` GiB|
+|アクセスモード| ReadWriteOnce |
+|volumeMode|ファイルシステム|
+
 ---
+
 ## パイプライン作成とTaskの追加
 
 ### パイプラインの新規作成
