@@ -60,16 +60,21 @@ Podとして起動・実行される各Taskは、Task終了時にPodが消えて
 ## ワークスペース用のPVCを作成しておく
 パイプラインのワークスペースには、各Task実行中にデータを保存するためのPVCが必要です。そのPVCを事前に作成しておきます。
 
-### PVC作成画面に移動
-- OpenShiftのコンソール画面（管理者向け表示）にて、左メニュー「**ストレージ**」から「**PersistentVolumeClaims**」をクリックし
-- 「**PersistentVolumeClaimの作成**」をクリックし「**with Form**」を選択
-- 以下の通り値を設定し「**作成**」をクリック
+### PVCを作成
+- OpenShiftのコンソール画面（開発者向け表示）にて、プロジェクトを「**myproject**」にする
+- 以下のコマンドをWeb  Terminalで実行し、PVCを作成する
+  ```
+  oc apply -f 
 
+  |項目|設定内容|
+  |---|---|
+  |PersistentVolumeClaim 名|`workspace-pvc`|
+  |サイズ|`1` GiB|
 
-|項目|設定内容|
-|---|---|
-|PersistentVolumeClaim 名|`workspace-pvc`|
-|サイズ|`1` GiB|
+  ```
+  workspace-pvc
+  ```
+
 
 ![alt text](<スクリーンショット 2025-01-09 15.19.24.png>)
 
