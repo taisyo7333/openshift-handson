@@ -365,37 +365,37 @@ trivy image IMAGE_NAME --severity HIGH,CRITICAL
 ここまでの作業で作成・実行したパイプラインを使い、コンテナイメージのビルドとスキャンが完了しました。このイメージを使ってアプリケーションをデプロイします。デプロイはArgoCDアプリケーションを利用しましょう。
 
 今回用意してあるマニフェストの一覧は以下の通りです。
-- dployment.yaml
-- service.yaml
-- route.yaml
+- [dployment.yaml](https://gitlab.com/masaki-oomura/openshift-handson/-/blob/main/pipeline-experience/sample-app/manifest/deployment.yaml?ref_type=heads)
+- [service.yaml](https://gitlab.com/masaki-oomura/openshift-handson/-/blob/main/pipeline-experience/sample-app/manifest/service.yaml?ref_type=heads)
+- [route.yaml](https://gitlab.com/masaki-oomura/openshift-handson/-/blob/main/pipeline-experience/sample-app/manifest/route.yaml?ref_type=heads)
 
-### log-testアプリのArgoCDアプリケーションを確認しておく
-- [./pipeline-experience/sample-app/argocd-app/argocd-app.yaml](https://gitlab.com/masaki-oomura/openshift-handson/-/blob/main/pipeline-experience/sample-app/argocd-app/argocd-app.yaml)にアクセスする
+また、既に用意してあるlog-testアプリのArgoCDアプリケーションは以下の通りです。
+- [argocd-app.yaml](https://gitlab.com/masaki-oomura/openshift-handson/-/blob/main/pipeline-experience/sample-app/argocd-app/argocd-app.yaml)にアクセスする
 
-```
-apiVersion: argoproj.io/v1alpha1
-kind: Application
-metadata:
-  name: log-test
-  namespace: openshift-gitops
-spec:
-  destination:
-    name: ''
-    namespace: myproject
-    server: https://kubernetes.default.svc
-  source:
-    path: ./pipeline-experience/sample-app/manifest
-    repoURL: https://gitlab.com/masaki-oomura/openshift-handson.git
-    targetRevision: main
-  sources: []
-  project: default
-  syncPolicy:
-    automated:
-      prune: true
-      selfHeal: true
-    syncOptions:
-      - CreateNamespace=true
-```
+  ```
+  apiVersion: argoproj.io/v1alpha1
+  kind: Application
+  metadata:
+    name: log-test
+    namespace: openshift-gitops
+  spec:
+    destination:
+      name: ''
+      namespace: myproject
+      server: https://kubernetes.default.svc
+    source:
+      path: ./pipeline-experience/sample-app/manifest
+      repoURL: https://gitlab.com/masaki-oomura/openshift-handson.git
+      targetRevision: main
+    sources: []
+    project: default
+    syncPolicy:
+      automated:
+        prune: true
+        selfHeal: true
+      syncOptions:
+        - CreateNamespace=true
+  ```
 
 ### NameSpaceにArgoCDによる管理を許可するアノテーションを付ける
 - Web Terminalを開き、以下コマンドを実行する
