@@ -151,10 +151,11 @@ PVCのスペックは以下の通り。
 
 ### Workspaceを追加
 - 「**Add workspace**」をクリックし、名前欄に「`workspace`」と記載
+  ```
+  workspace
+  ```
 
 ![alt text](image-9.png)
-
-![alt text](image-19.png)
 
 ## パラメータの追加と設定
 各Taskを実行するには、各Task毎に設定値を設定する必要があります。例えば、`git-clone`タスクには「**GitリポジトリのURL**」を値として与える必要があります。
