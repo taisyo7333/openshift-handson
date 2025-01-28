@@ -24,37 +24,38 @@ Mysqlコンテナをアプリケーションとしてデプロイするための
 - 開発者表示でNameSpace「**myproject**」を選択
 - 「**Web Terminal**」を起動し、以下のコマンドを適用してManifest一式を適用し、各種リソースを作成する
 
-① Manifestを適用するProjectを「myproject」に切り替える
-```
-oc project myproject
-```
+1. Manifestを適用するProjectを「myproject」に切り替える
+
+    ```
+    oc project myproject
+    ```
+
+2. Deploymentを適用する
+    ```
+    oc apply -f https://gitlab.com/masaki-oomura/mysql-k8s-demo/-/raw/main/manifest/mysql-deployment.yaml
+    ```
 ---
-② Deploymentを適用する
-```
-oc apply -f https://gitlab.com/masaki-oomura/mysql-k8s-demo/-/raw/main/manifest/mysql-deployment.yaml
-```
----
-③ PVCを適用する
-```
-oc apply -f https://gitlab.com/masaki-oomura/mysql-k8s-demo/-/raw/main/manifest/mysql-pvc.yaml
-```
----
-④ Secretを適用する
-```
-oc apply -f https://gitlab.com/masaki-oomura/mysql-k8s-demo/-/raw/main/manifest/mysql-secret.yaml
-```
----
-⑤ Serviceを適用する
-```
-oc apply -f https://gitlab.com/masaki-oomura/mysql-k8s-demo/-/raw/main/manifest/mysql-service.yaml
-```
+3. PVCを適用する
+    ```
+    oc apply -f https://gitlab.com/masaki-oomura/mysql-k8s-demo/-/raw/main/manifest/mysql-pvc.yaml
+    ```
+
+4. Secretを適用する
+    ```
+    oc apply -f https://gitlab.com/masaki-oomura/mysql-k8s-demo/-/raw/main/manifest/mysql-secret.yaml
+    ```
+
+5. Serviceを適用する
+    ```
+    oc apply -f https://gitlab.com/masaki-oomura/mysql-k8s-demo/-/raw/main/manifest/mysql-service.yaml
+    ```
+
 ### Mysql Podを確認
 
 - 開発者向け表示の「**トポロジー**」切り替える
 - Mysqlコンテナがデプロイされたか確認する
 
 ![alt text](image-2.png)
-
 
 ## MysqlにDB&TBL作成
 Mysql内にDatabaseとTableを作成します。これらデータはPVに保存され永続化されます。
@@ -68,28 +69,31 @@ Mysql内にDatabaseとTableを作成します。これらデータはPVに保存
 - 「**Podの詳細画面**」で「**ターミナル**」タブをクリック
 - MySQLに以下コマンドでrootログイン
 
-```
-mysql -uroot
-```
+    ```
+    mysql -uroot
+    ```
 
 ![alt text](image-3.png)
+
 ---
 **■補足：** Kubernetesでは、コンテナの内部にSSHで接続し、なんらかの操作を実行することができます。OpenShiftは画面コンソールから簡単にコンテナ内のシェルにアクセスし、Linuxコマンドによる操作が実行できます。
+
+
 
 ### DB&TBL作成し行を挿入する
 - 以下のSQLをコピペする
 
-```
-CREATE DATABASE movie;
-CREATE TABLE movie.ghibli (
-    id INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
-    release_year INT(4),
-    title VARCHAR(50),
-    director_name VARCHAR(50)
-    );
-USE movie;
-INSERT INTO ghibli (release_year,title,director_name) VALUES ('1984','Nausicaä of the Valley of the Wind','Hayao Miyazaki');
-```
+    ```
+    CREATE DATABASE movie;
+    CREATE TABLE movie.ghibli (
+        id INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
+        release_year INT(4),
+        title VARCHAR(50),
+        director_name VARCHAR(50)
+        );
+    USE movie;
+    INSERT INTO ghibli (release_year,title,director_name) VALUES ('1984','Nausicaä of the Valley of the Wind','Hayao Miyazaki');
+    ```
 
 ---
 **■補足：** Database「movie」の内部にTable「ghibli」を作成しました。ここにジブリ映画の情報を行として挿入しました。また、先頭列に行番号を自動的に挿入します。
@@ -97,12 +101,14 @@ INSERT INTO ghibli (release_year,title,director_name) VALUES ('1984','Nausicaä 
 | ----| ---- | ---- |---- |
 |1|1984|Nausicaä of the Valley of the Wind|Hayao Miyazaki|
 
+---
+
 ### 作成したTBLを確認
 - 以下のSQLで確認
+    ```
+    SELECT * FROM movie.ghibli;
+    ```
 
-```
-SELECT * FROM movie.ghibli;
-```
 ![alt text](image-4.png)
 
 ## MysqlのPVをアンマウント
@@ -122,23 +128,23 @@ Mysqlのデータを永続化しているPVを外してみます。その時Mysq
 ### データが消えた事を確認
 - 「**Podの詳細画面**」で「**ターミナル**」タブをクリック
 - MySQLにrootログインし、Databaseが消えたことを確認
-```
-sh-5.1$ mysql -uroot
-...
-mysql> show databases;
-+--------------------+
-| Database           |
-+--------------------+
-| information_schema |
-| mysql              |
-| performance_schema |
-| sys                |
-+--------------------+
-4 rows in set (0.00 sec)
+    ```
+    sh-5.1$ mysql -uroot
+    ...
+    mysql> show databases;
+    +--------------------+
+    | Database           |
+    +--------------------+
+    | information_schema |
+    | mysql              |
+    | performance_schema |
+    | sys                |
+    +--------------------+
+    4 rows in set (0.00 sec)
 
-mysql> SELECT * FROM movie.ghibli;
-ERROR 1049 (42000): Unknown database 'movie'
-```
+    mysql> SELECT * FROM movie.ghibli;
+    ERROR 1049 (42000): Unknown database 'movie'
+    ```
 
 ## 再度PVをマウントしデータが復活した事を確認
 Mysqlの内部に保存されていたデータはPVに保存されています。PVを取り外してもデータは失われません。再度PVをマウントし、Mysqlからデータを参照できるようにしましょう。
@@ -147,10 +153,9 @@ Mysqlの内部に保存されていたデータはPVに保存されています�
 - 「**(D)mysql**」の「**アクション**」から「**ストレージの追加**」をクリック
 - 「**PersistentVolumeClaim**」で「**既存の要求を仕様**」をチェック、先程Applyした「**mysql-pvc**」を選択
 - マウントパスはDeploymentに記載し以下を入力
-
-```
-/var/lib/mysql
-```
+    ```
+    /var/lib/mysql
+    ```
 
 - 「**保存**」をクリック
 - 再度Podが再作成されることを確認
@@ -160,16 +165,18 @@ Mysqlの内部に保存されていたデータはPVに保存されています�
 ---
 **■補足：** `/var/lib/mysql`はLinuxにインストールされたMysqlアプリケーションのデータが保存されるPATHです。
 
+---
+
 ### データが復活したことを確認
 - 「Podの詳細画面」で「ターミナル」タブをクリック
 - MySQLにrootログイン
-```
-mysql -uroot
-```
+    ```
+    mysql -uroot
+    ```
 - DB&TBLの復活を確認
-```
-SELECT * FROM movie.ghibli;
-```
+    ```
+    SELECT * FROM movie.ghibli;
+    ```
 
 ![alt text](image-7.png)
 
