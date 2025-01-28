@@ -22,10 +22,17 @@ https://github.com/openshift-instruqt/blog-django-py
 - 「**インポートストラテジーの編集**」をクリック
 - 「**Builder Image**」を選択
 - 「**Python 3.9 (UBI 8)**」が自動的に選ばれているか確認
+
+![alt text](<スクリーンショット 2025-01-28 11.13.54.png>)
+
 - アプリケーションから「**アプリケーショングループの作成**」をクリックし、以下のように入力
+
 ```
 blog-django-py
 ```
+
+![alt text](<スクリーンショット 2025-01-28 11.12.04.png>)
+
 - 「**作成**」をクリック
 
 ---
@@ -77,9 +84,6 @@ RHCOS（Red Hat Enterprise Linux Core OS）は、RHELと共通のカーネルに
 | `haproxy.router.openshift.io/balance` | `roundrobin` |ラウンドロビン方式とする設定
 | `haproxy.router.openshift.io/disable_cookies` | `true` |Cookie無効化の設定|
 
-
-![alt text](image-7.png)
-
 ---
 ※簡単コピペ用
 ```
@@ -96,6 +100,9 @@ true
 ```
 
 ---
+
+
+![alt text](image-7.png)
 
 - 「**保存**」をクリック
 - blog-django-pyアプリ画面を更新して、Pod名が切り替わる事を確認する
