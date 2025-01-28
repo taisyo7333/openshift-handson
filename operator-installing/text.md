@@ -87,7 +87,15 @@ OpenShiftおよびArgoCDにはそれぞれ独自の「**ロールベースのア
 ### OperatorHubに移動して検索
 - 先ほどと同様に「Operator Hub」を選択
 - `OpenShift Pipeline`を検索
+
+```
+OpenShift Pipeline
+```
+
 - デフォルト設定のままインストール
+
+![alt text](<スクリーンショット 2025-01-28 12.23.15.png>)
+
 - 「**Webコンソールの更新**」が表示されるのでクリックして画面を更新
 - コンソールの左メニューに「パイプライン」という項目が追加され、OpenShift Pipelinesが利用可能になる
 
