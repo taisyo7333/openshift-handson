@@ -128,8 +128,11 @@ Mysqlのデータを永続化しているPVを外してみます。その時Mysq
 ### データが消えた事を確認
 - 「**Podの詳細画面**」で「**ターミナル**」タブをクリック
 - MySQLにrootログインし、Databaseが消えたことを確認
+
     ```
-    sh-5.1$ mysql -uroot
+    mysql -uroot
+    ```
+    ```
     ...
     mysql> show databases;
     +--------------------+
