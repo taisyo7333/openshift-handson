@@ -182,6 +182,13 @@ PVCのスペックは以下の通り。
   |SOURCE_PATH|イメージをBuildする対象のアプリケーションのソースコードのありかを示すパス|`./pipeline-experience/sample-app/source`|
   |INTERNAL_REGISTRY_URL|コピー元の内部レジストリのURL|`image-registry.openshift-image-registry.svc:5000/myproject/log-test`|
 
+---
+**■補足：** OpenShiftクラスタ内には最初からイメージレジストリ（内部レジストリ）が作られています。内部レジストリの命名規則は以下の通りです。
+
+`image-registry.openshift-image-registry.svc:5000/<NameSpace名>/<アプリ名>`
+
+---
+
   **デフォルト値**
   ```
   `https://gitlab.com/masaki-oomura/openshift-handson.git
@@ -215,9 +222,13 @@ PVCのスペックは以下の通り。
 - 「**Tasks**」から当該Task名をクリック
 - 必須パラメータを設定する
 
-|パラメータ|詳細|設定するべき内容|
-|---|---|---|
-|url|Gitリポジトリのクローン先URL|`$(params.GIT_URL)`|
+  |パラメータ|詳細|設定するべき内容|
+  |---|---|---|
+  |url|Gitリポジトリのクローン先URL|`$(params.GIT_URL)`|
+
+  ```
+  $(params.GIT_URL)
+  ```
 
 ![alt text](image-23.png)
 
@@ -235,11 +246,21 @@ PVCのスペックは以下の通り。
 ### buildahの設定
 - 同様に必須パラメータを設定する
 
-|パラメータ|詳細|設定するべき内容|
-|---|---|---|
-|IMAGE|OpenShiftの内部イメージレジストリのPATH|`$(params.INTERNAL_REGISTRY_URL)`|
-|DOCKERFILE_PATH|Dockerfileが置いてあるディレクトリ|`$(params.DOCKERFILE_PATH)`|
-|CONTEXT|ビルドするアプリのソースコードが置いてあるディレクトリ|`$(params.SOURCE_PATH)`|
+  |パラメータ|詳細|設定するべき内容|
+  |---|---|---|
+  |IMAGE|OpenShiftの内部イメージレジストリのPATH|`$(params.INTERNAL_REGISTRY_URL)`|
+  |DOCKERFILE_PATH|Dockerfileが置いてあるディレクトリ|`$(params.DOCKERFILE_PATH)`|
+  |CONTEXT|ビルドするアプリのソースコードが置いてあるディレクトリ|`$(params.SOURCE_PATH)`|
+
+  ```
+  $(params.INTERNAL_REGISTRY_URL)
+  ```
+  ```
+  $(params.DOCKERFILE_PATH)
+  ```
+  ```
+  $(params.SOURCE_PATH)
+  ```
 
 ![alt text](<スクリーンショット 2025-01-10 14.29.01.png>)
 
@@ -248,12 +269,6 @@ PVCのスペックは以下の通り。
 
 ---
 
----
-**■補足②：** OpenShiftクラスタ内には最初からイメージレジストリ（内部レジストリ）が作られています。内部レジストリの命名規則は以下の通りです。
-
-`image-registry.openshift-image-registry.svc:5000/<NameSpace名>/<アプリ名>`
-
----
 - ワークスペース「source」に`workspace`を設定
 
 ![alt text](image-25.png)
@@ -263,10 +278,20 @@ PVCのスペックは以下の通り。
 - 「**ARGS**」欄で「**値の追加**」を2回クリック
 - 以下のように入力
 
-|パラメータ|詳細|設定するべき内容|
-|---|---|---|
-|ARGS|trivyコマンドを入力する欄|`image`<br>`--severity HIGH,CRITICAL`|
-|IMAGE_PATH|イメージスキャンする対象のコンテナイメージ格納先|`$(params.INTERNAL_REGISTRY_URL)`|
+  |パラメータ|詳細|設定するべき内容|
+  |---|---|---|
+  |ARGS|trivyコマンドを入力する欄|`image`<br>`--severity HIGH,CRITICAL`|
+  |IMAGE_PATH|イメージスキャンする対象のコンテナイメージ格納先|`$(params.INTERNAL_REGISTRY_URL)`|
+
+  ```
+  image
+  ```
+  ```
+  --severity HIGH,CRITICAL
+  ```
+  ```
+  $(params.INTERNAL_REGISTRY_URL)
+  ```
 
 ![alt text](<スクリーンショット 2025-01-10 14.38.13.png>)
 
