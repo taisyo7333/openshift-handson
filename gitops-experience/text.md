@@ -50,8 +50,9 @@ GitHubにアップロードされているサンプルアプリケーション�
 - ArgoCDのログイン後画面にて、左メニュー「**Applications**」をクリック
 - 「**+NEW APP**」をクリック
 - 「**EDIT AS YAML**」をクリックし、以下のYAMLファイルをコピペする
-  ```
-  apiVersion: argoproj.io/v1alpha1
+
+```
+apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   name: bgd
@@ -85,7 +86,7 @@ syncPolicy:
   automated:
     prune: true
     selfHeal: false
-  ```
+```
 
 ![alt text](image-18.png)
 
