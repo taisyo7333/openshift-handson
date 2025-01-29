@@ -52,37 +52,39 @@ GitHubにアップロードされているサンプルアプリケーション�
 - 「**EDIT AS YAML**」をクリックし、以下のYAMLファイルをコピペする
   ```
   apiVersion: argoproj.io/v1alpha1
-  kind: Application
-  metadata:
+kind: Application
+metadata:
   name: bgd
-  #アプリケーション名を指定します。
-  spec:
+spec:
   destination:
     name: ''
     namespace: bgd
-    #アプリケーションをDeployするNameSpace
-    server: 'https://kubernetes.default.svc'
-    #アプリケーションをDeployするKubernetes Cluster。
-    #ArgoCDがDeployされているCluster自体を指定するので、内部ホストを指定します。
+    server: https://kubernetes.default.svc
   source:
     path: apps/bgd/overlays/bgd
-    #Manifestファイルが置いてある場所のディレクトリパス
-    repoURL: 'https://github.com/redhat-developer-demos/openshift-gitops-examples'
-    #Manifest一式が格納されているGitリポジトリのURL
+    repoURL: https://github.com/redhat-developer-demos/openshift-gitops-examples
     targetRevision: main
-    #Gitリポジトリの対象ブランチ名
   sources: []
   project: default
-  #ArgoCD内の論理空間であるProjectの名称。ややこしいが、OpenShiftのProjectとは関係ない。
   syncPolicy:
     syncOptions:
       - CreateNamespace=true
-      #NameSpaceが存在しない場合に自動的につくるかの設定
-    automated:
-      prune: true
-      #Git Repositoryが削除されたらApplicationも消す設定
-      selfHeal: false
-      #Single Sourth of TruthとClusterの情報の不整合を自動矯正”しない”設定
+name: bgd
+destination:
+  name: ''
+  namespace: bgd
+  server: https://kubernetes.default.svc
+source:
+  path: apps/bgd/overlays/bgd
+  repoURL: https://github.com/redhat-developer-demos/openshift-gitops-examples
+  targetRevision: main
+project: default
+syncPolicy:
+  syncOptions:
+    - CreateNamespace=true
+  automated:
+    prune: true
+    selfHeal: false
   ```
 
 ![alt text](image-18.png)
