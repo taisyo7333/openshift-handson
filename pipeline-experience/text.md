@@ -370,7 +370,7 @@ trivy image IMAGE_NAME --severity HIGH,CRITICAL
 - [route.yaml](https://gitlab.com/masaki-oomura/openshift-handson/-/blob/main/pipeline-experience/sample-app/manifest/route.yaml?ref_type=heads)
 
 また、既に用意してあるlog-testアプリのArgoCDアプリケーションは以下の通りです。
-- [argocd-app.yaml](https://gitlab.com/masaki-oomura/openshift-handson/-/blob/main/pipeline-experience/sample-app/argocd-app/argocd-app.yaml)にアクセスする
+- [argocd-app.yaml](https://gitlab.com/masaki-oomura/openshift-handson/-/blob/main/pipeline-experience/sample-app/argocd-app/argocd-app.yaml)
 
   ```
   apiVersion: argoproj.io/v1alpha1
