@@ -58,7 +58,6 @@ metadata:
   name: bgd
 spec:
   destination:
-    name: ''
     namespace: bgd
     server: https://kubernetes.default.svc
   source:
@@ -70,22 +69,6 @@ spec:
   syncPolicy:
     syncOptions:
       - CreateNamespace=true
-name: bgd
-destination:
-  name: ''
-  namespace: bgd
-  server: https://kubernetes.default.svc
-source:
-  path: apps/bgd/overlays/bgd
-  repoURL: https://github.com/redhat-developer-demos/openshift-gitops-examples
-  targetRevision: main
-project: default
-syncPolicy:
-  syncOptions:
-    - CreateNamespace=true
-  automated:
-    prune: true
-    selfHeal: false
 ```
 
 ![alt text](image-18.png)
