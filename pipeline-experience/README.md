@@ -116,7 +116,7 @@ PVCのスペックは以下の通り。
   git-clone
   ```
 
-![alt text](image-8.png)
+![alt text](image-46.png)
 
 - 後に連続するTaskを追加
 
