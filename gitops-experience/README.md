@@ -74,6 +74,7 @@ spec:
 ![alt text](image-18.png)
 
 - 「**SAVE**」をクリックし、ArgoCDのGUIにYAMLファイルが反映された結果を確認してみる
+- もしシンクが完了しない場合は、上のメニュー「SYNC」→「SYNCRONIZE」をクリックする
 
 ![alt text](image-5.png)
 
