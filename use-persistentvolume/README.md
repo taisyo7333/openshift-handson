@@ -190,7 +190,7 @@ Mysqlの内部に保存されていたデータはPVに保存されています�
 
 - 「**PersistentVolumeClaim**」で「**既存の要求を仕様**」をチェック、先程Applyした「**mysql-pvc**」を選択
 - マウントパスはDeploymentに記載し以下を入力
-    ```W
+    ```
     /var/lib/mysql/data
     ```
 
