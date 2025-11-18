@@ -186,7 +186,7 @@ Mysqlの内部に保存されていたデータはPVに保存されています�
 ### Deploymentからストレージを追加
 - 「**(D)mysql**」の「**アクション**」から「**ストレージの追加**」をクリック
 
-![alt text](<スクリーンショット 2025-01-28 12.35.52.png>)
+![alt text](image-8.png)
 
 - 「**PersistentVolumeClaim**」で「**既存の要求を仕様**」をチェック、先程Applyした「**mysql-pvc**」を選択
 - マウントパスはDeploymentに記載し以下を入力
