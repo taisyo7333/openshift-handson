@@ -28,13 +28,13 @@ Gitリポジトリに格納されたDeploymentファイルを元にアプリのD
 ![alt text](image-3.png)
 GitHubにアップロードされているサンプルアプリケーション（bgd）のManifest一覧を確認しておきます。
 - 以下にアクセス
-    - https://github.com/redhat-developer-demos/openshift-gitops-examples/tree/main/apps/bgd/overlays/bgd
+    - https://github.com/masaki-oomura/openshift-gitops-examples/tree/main/apps/bgd/overlays/bgd
 - このManifestからデプロイされるアプリケーションは、環境変数で指定された色（color）の泡がプカプカ浮いているアプリです
 - アプリケーションを構成するManifestは以下です
-    - [bgd-ns.yaml](https://raw.githubusercontent.com/redhat-developer-demos/openshift-gitops-examples/refs/heads/main/apps/bgd/overlays/bgd/bgd-ns.yaml)：アプリをデプロイするNameSpace自体を表したYAML
-    - [bgd-deployment.yaml](https://raw.githubusercontent.com/redhat-developer-demos/openshift-gitops-examples/refs/heads/main/apps/bgd/overlays/bgd/bgd-deployment.yaml)：Deploymentファイル。この中で環境変数が定義されている
-    - [bgd-svc.yaml](https://raw.githubusercontent.com/redhat-developer-demos/openshift-gitops-examples/refs/heads/main/apps/bgd/overlays/bgd/bgd-svc.yaml)：アプリケーションをクラスタ内に公開する通信窓口を提供するService
-    - [bgd-route.yaml](https://raw.githubusercontent.com/redhat-developer-demos/openshift-gitops-examples/refs/heads/main/apps/bgd/overlays/bgd/bgd-route.yaml) ：インターネットに公開するためのRoute
+    - [bgd-ns.yaml](https://raw.githubusercontent.com/masaki-oomura/openshift-gitops-examples/refs/heads/main/apps/bgd/overlays/bgd/bgd-ns.yaml)：アプリをデプロイするNameSpace自体を表したYAML
+    - [bgd-deployment.yaml](https://raw.githubusercontent.com/masaki-oomura/openshift-gitops-examples/refs/heads/main/apps/bgd/overlays/bgd/bgd-deployment.yaml)：Deploymentファイル。この中で環境変数が定義されている
+    - [bgd-svc.yaml](https://raw.githubusercontent.com/masaki-oomura/openshift-gitops-examples/refs/heads/main/apps/bgd/overlays/bgd/bgd-svc.yaml)：アプリケーションをクラスタ内に公開する通信窓口を提供するService
+    - [bgd-route.yaml](https://raw.githubusercontent.com/masaki-oomura/openshift-gitops-examples/refs/heads/main/apps/bgd/overlays/bgd/bgd-route.yaml) ：インターネットに公開するためのRoute
 
 ## ArgoCDからManifestを適用してもらう
 先ほど確認したManifestをArgoCDアプリケーションからKubernetesクラスタに適用してもらいます。ArgoCDへの指示（ここにこんなManifestを適用してください）を「**ArgoCDアプリケーション**」と言います。ArgoCDアプリケーション自体もYAMLファイルで表現できます。
@@ -61,8 +61,8 @@ spec:
     namespace: bgd
     server: https://kubernetes.default.svc
   source:
+    repoURL: https://github.com/masaki-oomura/openshift-gitops-examples
     path: apps/bgd/overlays/bgd
-    repoURL: https://github.com/redhat-developer-demos/openshift-gitops-examples
     targetRevision: main
   sources: []
   project: default
