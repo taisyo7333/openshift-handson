@@ -1,0 +1,125 @@
+apiVersion: tekton.dev/v1
+kind: Pipeline
+metadata:
+  name: new-pipeline
+  namespace: myproject
+spec:
+  finally:
+    - name: trivy-scanner
+      params:
+        - name: ARGS
+          value:
+            - image
+            - '--severity HIGH,CRITICAL'
+        - name: TRIVY_IMAGE
+          value: 'docker.io/aquasec/trivy@sha256:944a044451791617cc0ed2ee4d1942a4f66b790d527fcd0575a6b399ccbc05a1'
+        - name: IMAGE_PATH
+          value: |
+            $(params.INTERNAL_REGISTRY_URL)
+        - name: AIR_GAPPED_ENABLED
+          value: 'false'
+      taskRef:
+        kind: Task
+        name: trivy-scanner
+      workspaces:
+        - name: manifest-dir
+          workspace: workspace
+  params:
+    - default: 'https://gitlab.com/masaki-oomura/openshift-handson.git'
+      name: GIT_URL
+      type: string
+    - default: ./pipeline-experience/sample-app/source/Dockerfile
+      name: DOCKERFILE_PATH
+      type: string
+    - default: ./pipeline-experience/sample-app/source
+      name: SOURCE_PATH
+      type: string
+    - default: 'image-registry.openshift-image-registry.svc:5000/myproject/log-test'
+      name: INTERNAL_REGISTRY_URL
+      type: string
+  tasks:
+    - name: buildah
+      params:
+        - name: IMAGE
+          value: $(params.INTERNAL_REGISTRY_URL)
+        - name: DOCKERFILE
+          value: $(params.DOCKERFILE_PATH)
+        - name: BUILD_ARGS
+          value:
+            - ''
+        - name: CONTEXT
+          value: $(params.SOURCE_PATH)
+        - name: STORAGE_DRIVER
+          value: vfs
+        - name: FORMAT
+          value: oci
+        - name: BUILD_EXTRA_ARGS
+          value: ''
+        - name: PUSH_EXTRA_ARGS
+          value: ''
+        - name: SKIP_PUSH
+          value: 'false'
+        - name: TLS_VERIFY
+          value: 'true'
+        - name: VERBOSE
+          value: 'false'
+      runAfter:
+        - git-clone
+      taskRef:
+        params:
+          - name: kind
+            value: task
+          - name: name
+            value: buildah
+          - name: namespace
+            value: openshift-pipelines
+        resolver: cluster
+      workspaces:
+        - name: source
+          workspace: workspace
+    - name: git-clone
+      params:
+        - name: CRT_FILENAME
+          value: ca-bundle.crt
+        - name: HTTP_PROXY
+          value: ''
+        - name: HTTPS_PROXY
+          value: ''
+        - name: NO_PROXY
+          value: ''
+        - name: SUBDIRECTORY
+          value: ''
+        - name: USER_HOME
+          value: /home/git
+        - name: DELETE_EXISTING
+          value: 'true'
+        - name: VERBOSE
+          value: 'false'
+        - name: SSL_VERIFY
+          value: 'true'
+        - name: URL
+          value: $(params.GIT_URL)
+        - name: REVISION
+          value: main
+        - name: REFSPEC
+          value: ''
+        - name: SUBMODULES
+          value: 'true'
+        - name: DEPTH
+          value: '1'
+        - name: SPARSE_CHECKOUT_DIRECTORIES
+          value: ''
+      taskRef:
+        params:
+          - name: kind
+            value: task
+          - name: name
+            value: git-clone
+          - name: namespace
+            value: openshift-pipelines
+        resolver: cluster
+      workspaces:
+        - name: output
+          workspace: workspace
+  workspaces:
+    - name: workspace
