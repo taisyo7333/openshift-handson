@@ -191,7 +191,7 @@ PVCのスペックは以下の通り。
 
   **デフォルト値**
   ```
-  `https://gitlab.com/masaki-oomura/openshift-handson.git
+  https://gitlab.com/masaki-oomura/openshift-handson.git
   ```
   ```
   ./pipeline-experience/sample-app/source/Dockerfile
