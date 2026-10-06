@@ -55,7 +55,7 @@ Red Hat OpenShift（以下、OpenShiftと省略）は、「**エンタープラ�
 ### 実行するコマンドの指定
 例：CMD 
 
-このコンテンツで利用するNode.jsアプリケーションの[Dockerfile](https://gitlab.com/masaki-oomura/openshift-handson/-/blob/main/pipeline-experience/sample-app/source/Dockerfile?ref_type=heads)を見てみましょう。
+このコンテンツで利用するNode.jsアプリケーションの[Dockerfile](https://gitlab.com/hikaru-nomura/openshift-handson/-/blob/main/pipeline-experience/sample-app/source/Dockerfile?ref_type=heads)を見てみましょう。
 
 ```
 # ベースイメージの取得
@@ -202,12 +202,10 @@ OpenShiftはオンプレミスのサーバにインストールして利用す�
 **■ コンソール画面（GUI）でなんでもできる** <br>
 Kubernetesを利用する上でまずハードルになるのがコマンド操作です。OpenShiftでは多くのリソースの可視化・操作がコンソール画面を介して可能になっています
 
-![alt text](image-9.png)
-
-![alt text](image-10.png)
+![alt text](image_console.jpg)
 
 ---
-※コンソール画面の詳細は[OpenShiftコンソール画面ツアー](https://gitlab.com/masaki-oomura/openshift-handson/-/blob/main/openshift-console-tour/text.md?ref_type=heads)で触れます。
+※コンソール画面の詳細は[OpenShiftコンソール画面ツアー](https://gitlab.com/hikaru-nomura/openshift-handson/-/blob/main/openshift-console-tour/text.md?ref_type=heads)で触れます。
 
 
 **■ Operatorを利用したアドオン管理機能** <br>
@@ -248,4 +246,4 @@ Red Hat OpenShiftを活用すれば、あらゆるインフラの上であらゆ
 ![alt text](image-16.png)
 
 ## 目次へ戻る
-[こちら](https://gitlab.com/masaki-oomura/openshift-handson/-/blob/main/README.md?ref_type=heads)
+[こちら](https://gitlab.com/hikaru-nomura/openshift-handson/-/blob/main/README.md?ref_type=heads)
