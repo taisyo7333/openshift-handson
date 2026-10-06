@@ -179,4 +179,4 @@ ArgoCDを利用した「**GitOps**」を体験しました。ManifestをGitリ�
 ![alt text](image-14.png)
 
 ## 目次へ戻る
-[こちら](https://gitlab.com/masaki-oomura/openshift-handson/-/blob/main/README.md?ref_type=heads)
+[こちら](https://gitlab.com/hikaru-nomura/openshift-handson/-/blob/main/README.md?ref_type=heads)
