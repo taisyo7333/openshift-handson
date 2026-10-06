@@ -22,7 +22,6 @@ Web Terminal
 
 ![alt text](image.png)
 ![alt text](<スクリーンショット 2025-01-07 17.25.55.png>)
-
 - `oc version`と入力し、ocコマンドが利用できることを確認しておく
 
 ```
