@@ -7,8 +7,7 @@
 「**Web Terminal Operator**」は、OpenShiftの画面コンソール上でコマンドライン（ターミナル）を利用できるようにする便利なOperatorです。OpenShiftはGUIでほとんどの操作を実現できますが、コマンドライン（CLI）を利用したい場面も存在します。そうした時に手軽にターミナルを利用できます。
 
 ### OperatorHubに移動
-- 「管理者向け表示」に切り替え
-- 左メニューの「Operator」から「Operator Hub」を選択
+- 左メニューの「**Operator**」から「**Operator Hub**」を選択
 
 ### Web Terminalをインストール
 - `Web Terminal`を検索
