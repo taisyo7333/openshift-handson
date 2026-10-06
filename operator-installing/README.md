@@ -21,8 +21,7 @@ Web Terminal
 - 画面右上に出てくる「>_」をクリックして初期化し、Web Terminalを利用可能にする
 
 ![alt text](image.png)
-![alt text](<スクリーンショット 2025-01-07 17.25.55.png>)
-
+![alt text](image-terminal.png)
 - `oc version`と入力し、ocコマンドが利用できることを確認しておく
 
 ```
@@ -94,7 +93,7 @@ OpenShift Pipeline
 
 - デフォルト設定のままインストール
 
-![alt text](<スクリーンショット 2025-01-28 12.23.15.png>)
+![alt text](image-pipelines.png)
 
 - 「**Webコンソールの更新**」が表示されるのでクリックして画面を更新
 - コンソールの左メニューに「パイプライン」という項目が追加され、OpenShift Pipelinesが利用可能になる
