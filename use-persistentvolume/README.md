@@ -244,4 +244,4 @@ Mysqlの内部に保存されていたデータはPVに保存されています�
 Kubernetesにおける永続ボリュームの仕組みを理解し、Mysqlコンテナを通して実機での挙動を確認しました。PVをつけ外ししてデータが消えたり復活したりする様を見ることができました。
 
 ## 目次へ戻る
-[こちら](https://gitlab.com/masaki-oomura/openshift-handson/-/blob/main/README.md?ref_type=heads)
+[こちら](https://gitlab.com/hikaru-nomura/openshift-handson/-/blob/main/README.md?ref_type=heads)
