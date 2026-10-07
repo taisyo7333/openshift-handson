@@ -16,9 +16,11 @@ GitHubに置いてあるソースコードから、Source to Image (S2I) を利�
 - トポロジー内を右クリック -> ポップアップメニュー ->「**プロジェクトに追加**」をクリック
 - 「**Gitからのインポート**」をクリック
 - 「**Gitリポジトリー URL**」にGitリポジトリのURLを入力
+
 ```
-https://github.com/openshift-instruqt/blog-django-py
+https://github.com/taisyo7333/blog-django-py
 ```
+
 - 「**インポートストラテジーの編集**」をクリック
 - 「**Builder Image**」を選択
 - 「**Python 3.9 (UBI 8)**」が自動的に選ばれているか確認
