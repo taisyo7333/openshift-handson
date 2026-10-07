@@ -315,7 +315,7 @@ PVCのスペックは以下の通り。
   ```
 
 
-![alt text](<スクリーンショット 2025-01-10 14.38.13.png>)
+![alt text](image-trivy-config.png)
 
 ---
 **■補足：** 「**Trivy**」は軽量な脆弱性検知ツールで、コンテナイメージもスキャンできます。コンテナイメージのみならず、ManifestファイルやIaCのファイル（Terraform 等）もスキャンできます。DesktopやServerにインストールして利用することもできますが、TektonのTaskとしても実行可能です。
