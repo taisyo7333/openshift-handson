@@ -177,8 +177,6 @@ PVCのスペックは以下の通り。
 
 ![alt text](image-add-parameters.png)
 
-![alt text](image-21.png)
-
 ### 各パラメータに名前:デフォルト値を設定する
 
 ![alt text](image-20.png)
