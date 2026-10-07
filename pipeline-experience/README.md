@@ -260,7 +260,7 @@ PVCのスペックは以下の通り。
   |パラメータ|詳細|設定するべき内容|
   |---|---|---|
   |IMAGE|OpenShiftの内部イメージレジストリのPATH|`$(params.INTERNAL_REGISTRY_URL)`|
-  |DOCKERFILE_PATH|Dockerfileが置いてあるディレクトリ|`$(params.DOCKERFILE_PATH)`|
+  |DOCKERFILE|Dockerfileが置いてあるディレクトリ|`$(params.DOCKERFILE_PATH)`|
   |CONTEXT|ビルドするアプリのソースコードが置いてあるディレクトリ|`$(params.SOURCE_PATH)`|
 
   **IMAGE**
