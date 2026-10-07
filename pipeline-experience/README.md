@@ -141,6 +141,8 @@ PVCのスペックは以下の通り。
 ---
 
 - 「**Finaly Task**」を追加する
+  1. 「**Finally Taskの追加**」をクリック。
+  2. 「**Taskの追加**」をクリック。
 
 ![alt text](image-13.png)
 
