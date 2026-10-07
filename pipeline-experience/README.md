@@ -309,6 +309,12 @@ PVCのスペックは以下の通り。
   $(params.INTERNAL_REGISTRY_URL)
   ```
 
+  **manifest-dir**
+  ```
+  workspace
+  ```
+
+
 ![alt text](<スクリーンショット 2025-01-10 14.38.13.png>)
 
 ---
