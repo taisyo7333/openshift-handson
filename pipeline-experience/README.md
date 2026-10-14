@@ -57,11 +57,14 @@ Podとして起動・実行される各Taskは、Task終了時にPodが消えて
 ![alt text](image-39.png)
 ![alt text](image-40.png)
 
+## プロジェクトの設定
+- OpenShiftのコンソール画面にて、プロジェクトを「**myproject**」にする
+- 以降の作業は全て「**myproject**」で実施します。
+
 ## ワークスペース用のPVCを作成しておく
 パイプラインのワークスペースには、各Task実行中にデータを保存するためのPVCが必要です。そのPVCを事前に作成しておきます。
 
 ### PVCを作成
-- OpenShiftのコンソール画面にて、プロジェクトを「**myproject**」にする
 - 以下のコマンドをWeb  Terminalで実行し、PVCを作成する
   ```
   oc apply -f  https://gitlab.com/hikaru-nomura/openshift-handson/-/raw/main/pipeline-experience/workspace-pvc.yaml
@@ -238,6 +241,12 @@ PVCのスペックは以下の通り。
   $(params.GIT_URL)
   ```
 
+  **output**
+  ```
+  workspace
+  ```
+
+
 ![alt text](image-23.png)
 
 ---
@@ -263,6 +272,7 @@ PVCのスペックは以下の通り。
   |IMAGE|OpenShiftの内部イメージレジストリのPATH|`$(params.INTERNAL_REGISTRY_URL)`|
   |DOCKERFILE|Dockerfileが置いてあるディレクトリ|`$(params.DOCKERFILE_PATH)`|
   |CONTEXT|ビルドするアプリのソースコードが置いてあるディレクトリ|`$(params.SOURCE_PATH)`|
+  |source| ワークスペースのsource | `workspace` |
 
   **IMAGE**
   ```
@@ -275,6 +285,10 @@ PVCのスペックは以下の通り。
   **CONTEXT**
   ```
   $(params.SOURCE_PATH)
+  ```
+  **source**
+  ```
+  workspace
   ```
 
 ![alt text](<スクリーンショット 2025-01-10 14.29.01.png>)
@@ -297,6 +311,7 @@ PVCのスペックは以下の通り。
   |---|---|---|
   |ARGS|trivyコマンドを入力する欄|`image`<br>`--severity HIGH,CRITICAL`|
   |IMAGE_PATH|イメージスキャンする対象のコンテナイメージ格納先|`$(params.INTERNAL_REGISTRY_URL)`|
+  |manifest-dir |  | `workspace` |
 
   **ARGS**
   ```
@@ -343,6 +358,7 @@ trivy image IMAGE_NAME --severity HIGH,CRITICAL
 
 ### 「開始をクリック]
 - パイプライン詳細画面の右上「**Actions**」から「**開始**」をクリック
+- ワークスペースのPVCを設定(後述)。
 
 ![alt text](image-28.png)
 
