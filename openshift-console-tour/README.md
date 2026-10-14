@@ -7,4 +7,4 @@
 ![alt text](image_console.jpg)
 
 ## 目次へ戻る
-[こちら](https://gitlab.com/hikaru-nomura/openshift-handson/-/blob/main/README.md?ref_type=heads)
+[こちら](../README.md)

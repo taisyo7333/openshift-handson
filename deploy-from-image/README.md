@@ -50,4 +50,4 @@ Podの詳細画面にて、Podのログやこれまでに起きたイベント�
 事前に用意されたコンテナイメージから簡単にアプリケーションをデプロイし、インターネットに公開することができました。
 
 ## 目次へ戻る
-[こちら](https://gitlab.com/hikaru-nomura/openshift-handson/-/blob/main/README.md?ref_type=heads)
+[こちら](../README.md)
