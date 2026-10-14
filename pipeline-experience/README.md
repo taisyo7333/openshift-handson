@@ -154,7 +154,7 @@ PVCのスペックは以下の通り。
 ![alt text](image-18.png)
 
 ### Workspaceを追加
-- 「**Add workspace**」をクリックし、名前欄に「`workspace`」と記載
+- 「**ワークスペースの追加**」をクリックし、名前欄に「`workspace`」と記載
   ```
   workspace
   ```
