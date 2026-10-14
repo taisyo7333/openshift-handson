@@ -74,11 +74,11 @@ spec:
 ![alt text](image-18.png)
 
 - 「**SAVE**」をクリックし、ArgoCDのGUIにYAMLファイルが反映された結果を確認してみる
-- もしシンクが完了しない場合は、上のメニュー「SYNC」→「SYNCRONIZE」をクリックする
+- 「**CREATE**」をクリックしてManifestを適用する
 
 ![alt text](image-5.png)
 
-- 「**CREATE**」をクリックしてManifestを適用する
+- もしシンクが完了しない場合は、上のメニュー「SYNC」→「SYNCRONIZE」をクリックする
 - Manifestが反映されたことを確認する
 
 ![alt text](image-6.png)
