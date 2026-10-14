@@ -362,6 +362,7 @@ trivy image IMAGE_NAME --severity HIGH,CRITICAL
 
 ![alt text](image-28.png)
 
+### パイプライン実行時の入力値を設定・確認する
 - パイプライン実行時の設定値に、パラメータのデフォルト値が入っていることを確認
 
 ![alt text](image-29.png)
@@ -371,7 +372,7 @@ trivy image IMAGE_NAME --severity HIGH,CRITICAL
 
 ---
 
-### ワークスペースのPVCを設定
+#### ワークスペースのPVCを設定
 - 事前に適用しておいたPVC「`workspace-pvc`」を設定
 
 ![alt text](image-31.png)
