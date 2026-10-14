@@ -46,19 +46,6 @@ OpenShift GitOps
 - デフォルト設定のままインストール
 - 「**Webコンソールの更新**」が表示されるのでクリックして画面を更新
 
-### 事前準備（おまじない）
-Web Terminalから以下のコマンドを実行しておいてください。
-```
-oc create -f - <<EOF
-apiVersion: user.openshift.io/v1
-kind: Group
-metadata:
-  name: cluster-admins
-users:
-  - cluster-admin
-EOF
-```
-
 ---
 
 **■ ArgoCDとOpenShiftのRBACの関係** <br>
