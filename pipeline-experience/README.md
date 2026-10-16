@@ -103,6 +103,11 @@ PVCのスペックは以下の通り。
 ---
 
 ## パイプライン作成とTaskの追加
+* これからパイプラインを作成していきます。
+
+**留意事項**
+* ３つのTaskを追加していきます。各Taskに `Warning(!)` が表示されますが気にせず進めてください。後ほど入力し解消します。
+
 
 ### パイプラインの新規作成
 - 「**Pipelines**」メニューの「作成」プルダウンから「Pipeline」を選択
@@ -305,6 +310,8 @@ PVCのスペックは以下の通り。
 ### trivy-scannerの設定
 - 同様に必須パラメータを設定する
 - 「**ARGS**」欄で「**値の追加**」を2回クリック
+    - 注意事項：後述の`image` と `--severity HIGH,CRITICAL` を２行に分けて設定します。
+
 - 以下のように入力
 
   |パラメータ|詳細|設定するべき内容|
@@ -313,13 +320,14 @@ PVCのスペックは以下の通り。
   |IMAGE_PATH|イメージスキャンする対象のコンテナイメージ格納先|`$(params.INTERNAL_REGISTRY_URL)`|
   |manifest-dir |  | `workspace` |
 
-  **ARGS**
+  **ARGS**  　　
   ```
   image
   ```
   ```
   --severity HIGH,CRITICAL
   ```
+
   **IMAGE_PATH**
   ```
   $(params.INTERNAL_REGISTRY_URL)
