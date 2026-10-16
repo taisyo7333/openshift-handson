@@ -60,7 +60,10 @@ OpenShiftおよびArgoCDにはそれぞれ独自の「**ロールベースのア
 ---
 
 1. コンソール画面右上の「アプリケーションタイル」をクリックする(下図参照：アプリケーションタイル：■が９つあるアイコン)
-2. アクセスし、OpenShiftのSSOでログインしてみる
+1. Cluster ArgoCD をクリックして、ArgoCDのコンソールを開く
+1. `LOGIN VIA OPENSHIFT` をクリックする
+1. `cluster-admin` とそのパスワードでログインする
+ 
 
 ![alt text](image-2.png)
 ![alt text](<スクリーンショット 2025-01-07 17.32.34.png>)
