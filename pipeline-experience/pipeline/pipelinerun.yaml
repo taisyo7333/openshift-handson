@@ -11,7 +11,7 @@ metadata:
 spec:
   params:
     - name: GIT_URL
-      value: 'https://gitlab.com/masaki-oomura/openshift-handson.git'
+      value: 'https://gitlab.com/hikaru-nomura/openshift-handson.git'
     - name: DOCKERFILE_PATH
       value: ./pipeline-experience/sample-app/source/Dockerfile
     - name: SOURCE_PATH

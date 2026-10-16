@@ -10,7 +10,7 @@ spec:
     server: https://kubernetes.default.svc
   source:
     path: ./pipeline-experience/sample-app/manifest
-    repoURL: https://gitlab.com/masaki-oomura/openshift-handson.git
+    repoURL: https://gitlab.com/hikaru-nomura/openshift-handson.git
     targetRevision: main
   sources: []
   project: default

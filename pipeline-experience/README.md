@@ -401,7 +401,7 @@ trivy image IMAGE_NAME --severity HIGH,CRITICAL
 - [route.yaml](https://gitlab.com/hikaru-nomura/openshift-handson/-/blob/main/pipeline-experience/sample-app/manifest/route.yaml?ref_type=heads)
 
 また、既に用意してあるlog-testアプリのArgoCDアプリケーションは以下の通りです。
-- [argocd-app.yaml](https://gitlab.com/masaki-oomura/openshift-handson/-/blob/main/pipeline-experience/sample-app/argocd-app/argocd-app.yaml)
+- [argocd-app.yaml](https://gitlab.com/hikaru-nomura/openshift-handson/-/blob/main/pipeline-experience/sample-app/argocd-app/argocd-app.yaml)
 
   ```
   apiVersion: argoproj.io/v1alpha1
@@ -456,7 +456,7 @@ oc apply -f https://gitlab.com/hikaru-nomura/openshift-handson/-/raw/main/pipeli
 ```
 
 ---
-**■補足：** 「[GitOpsを体験](https://gitlab.com/nomura-nomura/openshift-handson/-/blob/main/gitops-experience/text.md?ref_type=heads#argocd%E3%81%8B%E3%82%89manifest%E3%82%92%E9%81%A9%E7%94%A8%E3%81%97%E3%81%A6%E3%82%82%E3%82%89%E3%81%86)」では、ArgoCDのコンソール画面からArgoCDアプリケーションのYAMLファイルを適用しましたが、ArgoCDのadmin権限を持つOpenShiftユーザがocコマンドを利用して直接YAMLファイルをクラスタに適用することもできます。
+**■補足：** 「[GitOpsを体験](https://gitlab.com/hikaru-nomura/openshift-handson/-/blob/main/gitops-experience/text.md?ref_type=heads#argocd%E3%81%8B%E3%82%89manifest%E3%82%92%E9%81%A9%E7%94%A8%E3%81%97%E3%81%A6%E3%82%82%E3%82%89%E3%81%86)」では、ArgoCDのコンソール画面からArgoCDアプリケーションのYAMLファイルを適用しましたが、ArgoCDのadmin権限を持つOpenShiftユーザがocコマンドを利用して直接YAMLファイルをクラスタに適用することもできます。
 
 ---
 

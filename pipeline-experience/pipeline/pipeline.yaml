@@ -25,7 +25,7 @@ spec:
         - name: manifest-dir
           workspace: workspace
   params:
-    - default: 'https://gitlab.com/masaki-oomura/openshift-handson.git'
+    - default: 'https://gitlab.com/hikaru-nomura/openshift-handson.git'
       name: GIT_URL
       type: string
     - default: ./pipeline-experience/sample-app/source/Dockerfile
