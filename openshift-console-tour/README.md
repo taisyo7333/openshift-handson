@@ -4,7 +4,7 @@
 ## コンソール画面の機能
 クラスタを構成する要素（ノード・ストレージ・ネットワーク 等）の管理や、各Namespace内でのアプリケーション運用を行います。
 
-![alt text](image_console.jpg)
+![alt text](image_console.png)
 
 ## 目次へ戻る
 [こちら](../README.md)

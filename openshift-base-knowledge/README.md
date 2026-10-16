@@ -202,7 +202,7 @@ OpenShiftはオンプレミスのサーバにインストールして利用す�
 **■ コンソール画面（GUI）でなんでもできる** <br>
 Kubernetesを利用する上でまずハードルになるのがコマンド操作です。OpenShiftでは多くのリソースの可視化・操作がコンソール画面を介して可能になっています
 
-![alt text](image_console.jpg)
+![alt text](image_console.png)
 
 ---
 ※コンソール画面の詳細は[OpenShiftコンソール画面ツアー](https://gitlab.com/hikaru-nomura/openshift-handson/-/blob/main/openshift-console-tour/text.md?ref_type=heads)で触れます。
