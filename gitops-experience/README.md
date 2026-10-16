@@ -78,7 +78,10 @@ spec:
 
 ![alt text](image-5.png)
 
-- もしシンクが完了しない場合は、上のメニュー「SYNC」→「SYNCRONIZE」をクリックする
+- もしシンクが完了しない場合は下記をお試しください。
+    1. Application 「**bgd**」 下部にある 「**Sync**」ボタンをクリックする
+    2. 詳細画面が表示される。
+    3. 詳細画面上部の「**SYNCRONIZE**」をクリックする
 - Manifestが反映されたことを確認する
 
 ![alt text](image-6.png)
