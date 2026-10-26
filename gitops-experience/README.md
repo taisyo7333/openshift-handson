@@ -61,7 +61,7 @@ spec:
     namespace: bgd
     server: https://kubernetes.default.svc
   source:
-    repoURL: https://github.com/masaki-oomura/openshift-gitops-examples
+    repoURL: https://github.com/redhat-developer-demos/openshift-gitops-examples
     path: apps/bgd/overlays/bgd
     targetRevision: main
   sources: []
