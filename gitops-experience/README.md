@@ -163,7 +163,7 @@ OpenShiftクラスタに適用されているDeploymentと、Gitリポジトリ�
 ![alt text](image-13.png)
 
 ---
-**■ 補足：** ArgoCDアプリケーションの設定によって、「**不整合を検知した瞬間にGitリポジトリの内容に矯正する**」を実現できます。その場合、ArgoCDアプリケーションの`spec.syncPolicy.automated.selfHeal`を`true`に変更します。
+**■ 任意課題：** ArgoCDアプリケーションの設定によって、「**不整合を検知した瞬間にGitリポジトリの内容に矯正する**」を実現できます。その場合、ArgoCDアプリケーションの`spec.syncPolicy.automated.selfHeal`を`true`に変更します。
 ```
 apiVersion: argoproj.io/v1alpha1
 kind: Application
