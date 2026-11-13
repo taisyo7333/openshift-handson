@@ -24,10 +24,16 @@ Web Terminal
 1. `開始`をクリックして、Web Terminalを利用可能にする
 
 ![alt text](image-terminal.png)
-- `oc version`と入力し、ocコマンドが利用できることを確認しておく
+- `oc version`と入力する。 ocコマンドが利用できることを確認する。
 
-```
+```sh
 oc version
+```
+
+- `oc whoami`と入力する。`oc login` をせずとも既にログイン済みであることを確認する。
+
+```sh
+oc whoami
 ```
 
 
